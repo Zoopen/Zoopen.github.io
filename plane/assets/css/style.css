@@ -1,0 +1,183 @@
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.stage {
+  width: 200%;
+  height: 100%;
+  background: red;
+  transition: all 0.3s;
+}
+.stage .startScene {
+  width: 50%;
+  height: 100%;
+  float: left;
+  position: relative;
+  background-size: cover;
+  background-position: center 0px;
+  background-repeat: repeat-y;
+  background-image: url('../images/background-start.png');
+}
+.stage .startScene button.startGameBtn {
+  width: 30%;
+  line-height: 34px;
+  background: lightgray;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 34px;
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  margin-left: -15%;
+}
+.stage .gameScene {
+  width: 50%;
+  height: 100%;
+  float: left;
+  position: relative;
+  background-size: cover;
+  background-position: center 0px;
+  background-repeat: repeat-y;
+  background-image: url("../images/background-game.png");
+}
+.stage .gameScene img {
+  position: absolute;
+}
+.stage .gameScene .score {
+  width: 100%;
+  position: absolute;
+  z-index: 9;
+}
+.stage .gameScene .score span {
+  margin: 20px;
+}
+.stage .gameScene .score span:first-child {
+  float: left;
+  font-weight: bold;
+}
+.stage .gameScene .score span:first-child::before {
+  content: attr(class) ":";
+}
+.stage .gameScene .score span:first-child::after {
+  content: "分";
+}
+.stage .gameScene .score span:last-child {
+  display: none;
+  float: right;
+}
+.stage .gameScene .score span:last-child::before {
+  content: attr(class) ":";
+}
+.stage .gameScene .ranking {
+  width: 60%;
+  margin: 0 auto;
+  border-radius: 5px;
+  transition: all 1s;
+  border: 3px solid black;
+  position: relative;
+  z-index: 9;
+}
+.stage .gameScene .ranking table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #efefef;
+  text-align: center;
+}
+.stage .gameScene .ranking table,
+.stage .gameScene .ranking td,
+.stage .gameScene .ranking th {
+  border: 1px solid black;
+}
+.stage .gameScene .dead {
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  width: 100%;
+  text-align: center;
+  z-index: 9;
+}
+.stage .gameScene .dead .restart {
+  width: 30%;
+  line-height: 34px;
+  background: lightgray;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 34px;
+}
+.stage .gameScene .dead .revive {
+  width: 30%;
+  line-height: 34px;
+  background: lightgray;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 34px;
+}
+.stage .gameScene .record {
+  background-color: rgba(55, 55, 55, 0.5);
+  text-align: center;
+  color: white;
+  font-weight: bolder;
+  font-size: 20px;
+  position: relative;
+  top: 30%;
+  left: 0;
+  line-height: 60px;
+  transition: all 0.2s;
+  border-radius: 20px;
+  z-index: 9;
+}
+.stage .gameScene .record label {
+  line-height: 60px;
+}
+.stage .gameScene .record label input {
+  outline: none;
+  border: none;
+  line-height: 34px;
+  border-radius: 20px;
+  padding: 0 20px;
+}
+.stage .gameScene .record label button {
+  outline: none;
+  border: none;
+  background: orangered;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 20px;
+}
+.stage .gameScene .shangbang {
+  text-align: center;
+}
+.stage .gameScene .shangbang span {
+  color: orange;
+  font-size: 32px;
+}
+.stage .gameScene .pauseView {
+  text-align: center;
+  margin-top: 20%;
+  pointer-events: none;
+}
+.stage .gameScene .pauseView span {
+  padding: 5px 10px;
+  letter-spacing: 2px;
+  border: 1px solid gray;
+  color: #424242;
+  opacity: 0;
+  transition: all 0.6s;
+}
+.stage .gameScene .again {
+  outline: none;
+  border: none;
+  background: orangered;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 20px;
+  display: block;
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/*# sourceMappingURL=./style.css.map */

@@ -1,0 +1,205 @@
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.scene() {
+    width: 50%;
+    height: 100%;
+    float: left;
+    position: relative;
+    background-size: cover;
+    background-position: center 0px;
+    background-repeat: repeat-y;
+}
+
+.buttom() {
+    width: 30%;
+    line-height: 34px;
+    background: lightgray;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 34px;
+}
+
+.stage {
+    width: 200%;
+    height: 100%;
+    background: red;
+    transition: all .3s;
+
+    // margin-left: -100%;
+    .startScene {
+        .scene;
+        background-image: url('../images/background-start.png');
+
+        button.startGameBtn {
+            .buttom;
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            margin-left: -15%;
+        }
+    }
+
+    .gameScene {
+        .scene;
+
+        img {
+            position: absolute;
+        }
+
+        background-image: url("../images/background-game.png");
+
+        .score {
+            width: 100%;
+            position: absolute;
+            z-index: 9;
+
+            span {
+                margin: 20px;
+
+                &:first-child {
+                    float: left;
+                    font-weight: bold;
+
+                    &::before {
+                        content: attr(class) ":";
+                    }
+
+                    &::after {
+                        content: "分";
+                    }
+                }
+
+                &:last-child {
+                    display: none;
+                    float: right;
+
+                    &::before {
+                        content: attr(class) ":";
+                    }
+                }
+            }
+        }
+
+        .ranking {
+            width: 60%;
+            margin: 0 auto;
+            border-radius: 5px;
+            // margin-top: 100px;
+            transition: all 1s;
+            border: 3px solid black;
+            position: relative;
+            z-index: 9;
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                background: #efefef;
+                text-align: center;
+            }
+
+            table,
+            td,
+            th {
+                border: 1px solid black;
+            }
+        }
+
+        .dead {
+            position: absolute;
+            bottom: 0%;
+            left: 0%;
+            width: 100%;
+            text-align: center;
+            z-index: 9;
+
+            .restart {
+                .buttom;
+            }
+
+            .revive {
+                .buttom;
+            }
+        }
+
+        .record {
+            background-color: rgba(55, 55, 55, .5);
+            text-align: center;
+            color: white;
+            font-weight: bolder;
+            font-size: 20px;
+            position: relative;
+            top: 30%;
+            left: 0;
+            line-height: 60px;
+            transition: all .2s;
+            border-radius: 20px;
+            // margin-left: 367px;
+            z-index: 9;
+
+            label {
+                line-height: 60px;
+
+                input {
+                    outline: none;
+                    border: none;
+                    line-height: 34px;
+                    border-radius: 20px;
+                    padding: 0 20px;
+                }
+
+                button {
+                    outline: none;
+                    border: none;
+                    background: orangered;
+                    padding: 10px 20px;
+                    color: white;
+                    border-radius: 20px;
+                }
+            }
+        }
+
+        .shangbang {
+            text-align: center;
+
+            span {
+                color: orange;
+                font-size: 32px;
+            }
+        }
+
+        .pauseView {
+            text-align: center;
+            margin-top: 20%;
+            pointer-events: none;
+
+            span {
+                padding: 5px 10px;
+                letter-spacing: 2px;
+                border: 1px solid gray;
+                color: rgb(66, 66, 66);
+                opacity: 0;
+                transition: all .6s;
+            }
+        }
+
+        .again {
+            outline: none;
+            border: none;
+            background: orangered;
+            padding: 10px 20px;
+            color: white;
+            border-radius: 20px;
+            display: block;
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}

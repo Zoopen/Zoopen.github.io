@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>飞机大战</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <div class="stage">
+        <div class="startScene">
+            <button class="startGameBtn">开始游戏</button>
+        </div>
+        <div class="gameScene">
+            <div class="score">
+                <span class="P1">0</span>
+                <span class="p2">0</span>
+            </div>
+            <div class="ranking">
+                <table>
+                    <tr>
+                        <th>昵称</th>
+                        <th>得分</th>
+                        <th>排名</th>
+                    </tr>
+                    <tr class="ranking-score">
+                        <td class="ranking-nickname">无</td>
+                        <td class="ranking-scoreBoard">0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr class="ranking-score">
+                        <td class="ranking-nickname">无</td>
+                        <td class="ranking-scoreBoard">0</td>
+                        <td>2</td>
+                    </tr>
+                    <tr class="ranking-score">
+                        <td class="ranking-nickname">无</td>
+                        <td class="ranking-scoreBoard">0</td>
+                        <td>3</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="dead">
+                <button class="restart">重新开始</button>
+                <button class="revive">涅槃重生</button>
+            </div>
+            <div class="record">
+                <label for="">
+                    恭喜打破纪录，少侠留下大名：
+                    <input type="text" name="record" id="">
+                    <button class="submit">提交</button>
+                </label>
+            </div>
+            <div class="shangbang">
+                <span></span>
+            </div>
+            <div class="pauseView">
+                <span>继续游戏</span>
+            </div>
+        </div>
+    </div>
+    <script src="./assets/js/main.js"></script>
+</body>
+
+</html>
