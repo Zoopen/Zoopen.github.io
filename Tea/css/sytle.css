@@ -1,0 +1,306 @@
+header .nav .container {
+  width: 900px;
+  margin: 0 auto;
+}
+header .nav .container .logo {
+  float: left;
+  margin-top: 20px;
+}
+header .nav .container .logo img {
+  height: 50px;
+  display: inline-block;
+}
+header .nav .container span.title {
+  float: left;
+  margin: 44px 20px 0 10px;
+}
+header .nav .container ul {
+  line-height: 50px;
+  text-align: center;
+}
+header .nav .container ul::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+header .nav .container ul li {
+  width: 80px;
+  float: left;
+  padding: 15px;
+  background: white;
+  border-right: 1px solid white;
+}
+header .nav .container ul li:first-child {
+  background: lightsalmon;
+}
+header .nav .container ul li:hover {
+  background: lightsalmon;
+}
+header .banner {
+  background: url("../images/banner.png") no-repeat top center;
+  background-size: 100%;
+  height: 400px;
+  width: 100%;
+}
+div.content section.slider {
+  height: 600px;
+}
+div.content section.slider div.container {
+  width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+div.content section.slider div.container h3 {
+  width: 200px;
+  margin: 0 auto;
+  padding: 20px 0 20px 70px;
+}
+div.content section.slider div.container p {
+  width: 400px;
+  margin: 0 auto;
+  padding-left: 123px;
+}
+div.content section.slider div.container ul {
+  position: absolute;
+  top: 72px;
+  left: 50%;
+  width: 900px;
+  margin-left: -450px;
+}
+div.content section.slider div.container ul::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+div.content section.slider div.container ul li {
+  float: left;
+  padding-top: 20px;
+  position: relative;
+  width: 25%;
+}
+div.content section.slider div.container ul li span {
+  position: absolute;
+  bottom: 0;
+  left: 68px;
+}
+div.content section.about {
+  width: 1100px;
+  margin: 0 auto;
+}
+div.content section.about div.container {
+  background: red;
+  background: url(../images/aboutus\ bg.jpg) no-repeat top center;
+  background-size: 100%;
+  padding-bottom: 20px;
+}
+div.content section.about div.container h3 {
+  width: 200px;
+  margin: 0 auto;
+  color: white;
+  padding-left: 139px;
+  padding-top: 20px;
+}
+div.content section.about div.container p {
+  width: 200px;
+  margin: 0 auto;
+  color: white;
+  padding-left: 122px;
+}
+div.content section.about div.container ul {
+  width: 710px;
+  margin: 0 auto;
+  padding-top: 84px;
+}
+div.content section.about div.container ul::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+div.content section.about div.container ul li {
+  float: left;
+}
+div.content section.about div.container ul li img {
+  height: 300px;
+}
+div.content section.service div.container {
+  width: 900px;
+  margin: 0 auto;
+}
+div.content section.service div.container h3 {
+  width: 200px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 25px 0 10px 0;
+}
+div.content section.service div.container p {
+  width: 200px;
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 20px;
+}
+div.content section.service div.container ul {
+  width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+div.content section.service div.container ul::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+div.content section.service div.container ul li {
+  float: left;
+  width: 33%;
+}
+div.content section.service div.container ul li img {
+  border-radius: 50%;
+  background: red;
+}
+div.content section.service div.container ul li h4 {
+  padding-top: 20px;
+  font-weight: bold;
+}
+div.content section.service div.container ul li p {
+  padding-top: 10px;
+  color: gray;
+}
+div.content section.news {
+  width: 1100px;
+  margin: 0 auto;
+}
+div.content section.news div.container {
+  width: 100%;
+  padding-bottom: 30px;
+  background: url("../images/newsbg.jpg") no-repeat top center;
+  background-size: 100%;
+  position: relative;
+}
+div.content section.news div.container h3 {
+  position: absolute;
+  top: 229px;
+  left: 128px;
+  color: white;
+}
+div.content section.news div.container div.news-top {
+  width: 900px;
+  margin: 0 auto;
+  padding-top: 280px;
+}
+div.content section.news div.container div.news-top::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+div.content section.news div.container div.news-top img {
+  width: 480px;
+  float: left;
+}
+div.content section.news div.container div.news-top div.news-content {
+  float: left;
+  margin-left: 40px;
+}
+div.content section.news div.container div.news-top div.news-content h4 {
+  font-weight: bold;
+}
+div.content section.news div.container div.news-top div.news-content span {
+  color: gray;
+  margin-top: 10px;
+  display: inline-block;
+}
+div.content section.news div.container div.news-top div.news-content ul {
+  list-style: circle;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+div.content section.news div.container div.news-top div.news-content ul li {
+  margin-top: 10px;
+}
+div.content section.news div.container div.news-bottom ul {
+  width: 900px;
+  padding-top: 30px;
+  margin: 0 auto;
+}
+div.content section.news div.container div.news-bottom ul::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+div.content section.news div.container div.news-bottom ul li {
+  float: left;
+  width: 25%;
+}
+div.content section.news div.container div.news-bottom ul li img {
+  width: 210px;
+}
+footer {
+  background: black;
+}
+footer div.footer-top {
+  width: 900px;
+  margin: 0 auto;
+  border-bottom: 1px solid gray;
+}
+footer div.footer-top ul {
+  line-height: 20px;
+}
+footer div.footer-top ul::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+footer div.footer-top ul li {
+  float: left;
+  width: 33%;
+}
+footer div.footer-top ul li::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+footer div.footer-top ul li img {
+  float: left;
+  width: 47px;
+}
+footer div.footer-top ul li p {
+  color: white;
+  font-size: 14px;
+}
+footer div.footer-middle {
+  width: 900px;
+  margin: 0 auto;
+}
+footer div.footer-middle ul {
+  width: 825px;
+  margin: 0 auto;
+  text-align: center;
+}
+footer div.footer-middle ul::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+footer div.footer-middle ul li {
+  float: left;
+  width: 135px;
+  padding: 15px;
+}
+footer div.footer-middle ul li::after {
+  content: "|";
+  padding-left: 50px;
+}
+footer div.footer-middle ul li:last-child::after {
+  display: none;
+}
+footer div.footer-bottom {
+  background: black;
+  height: 80px;
+}
+footer div.footer-bottom p {
+  width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  color: white;
+}
+/*# sourceMappingURL=./sytle.css.map */

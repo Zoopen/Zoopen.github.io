@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            height: 100vh;
+            background-image: url("./img/bg.jfif");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        a {
+            text-decoration: none;
+
+        }
+
+        button {
+            outline: none;
+            border: none;
+        }
+
+        section {
+            width: 450px;
+            height: 600px;
+            margin: 100px auto;
+        }
+
+        section header {
+            overflow: hidden;
+        }
+
+        section header a {
+            color: white;
+            float: left;
+            font-size: 12px;
+            line-height: 30px;
+        }
+
+        section header a:last-child {
+            float: right;
+        }
+
+        .register {
+            background: white;
+            text-align: center;
+            padding: 45px 40px;
+            border-radius: 5px;
+        }
+
+        .register img {
+            width: 100px;
+
+        }
+
+        .register form label {
+            text-align: left;
+            display: block;
+            margin: 20px 0;
+        }
+
+        .register form label input {
+            display: block;
+            width: 100%;
+            line-height: 30px;
+            padding: 0 10px;
+            /* 上面设置了padding导致布局中 用box-sizing */
+            box-sizing: border-box;
+        }
+
+        .box {
+            position: relative;
+        }
+
+        .box button {
+            position: absolute;
+            top: 50%;
+            right: 5px;
+            line-height: 24px;
+            margin-top: -12px;
+            color: gray;
+        }
+
+        .register form label span {
+            color: red;
+            font-size: 12px;
+            display: block;
+            margin: 5px 0;
+            display: none;
+        }
+
+        .register form label span::before {
+            content: "";
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAEN0lEQVRYR82YXWwUZRSGn3e7ulD8bSUGxYi4QKzdof7UxhuCNwJiCdBuAiZNjJELe6mJ3qhcqIneqDHRGI3xhqAwbTH1B4MxwWiMksjP7raG0HBhgGAiJYgQqe0cs1u37S473f1mUTtXm+x53/PMmfm+c74Rc/zSHOejLkBL0wCpBzBbBLEmsCbM/gSNEMRGOHvkuPYzXk8RnAENYnR5m5BtROoErg8FMLuE+BpjkDH7RIO5X11hnQCty+tAfIC42zURZoa0G9guP3O0Vn1NgLZhxbUkrn4L9HitxuFxFmDsZGysV4NHz1fzqwpom1rvIh77HLijmpnT/8YQAWs1kDkxm25WQEu3roeYD8x3Sl5zsJ0msDXqz2XCJKGAtrH1Tq7SYdA1NeeLFGinmVB7WCUrAlrnLY3Maz4IWhEpp7PIfuac2rUvc6FcWhkw7b0DPOWY5zeC4CWk80gvAkuc9GY71JftqQpom1YuJ27DkN+EXa7xDvnDB/IK29h2A/GJEaRmFwcwT342O1NzWQWt2+tHbHY0Pis/2zRTY93eD4gOR5+v5GcfDgW0dEsS4sfcTIvRwWb5uT2FCqZX3grBCGies9cE92kgc7CoK6mgdaeeQ3rV2bRAZQbKA2bBepCWRvIheEV+7vkQwCiPJRpGuMqG5WenWulUBW196kYaNRopndmHSDuwIECx6zB7F2lRJK+CSIvlHzlZ+FU0sXRLG8QPuZvaiPzssrIF8hFii7vXPwpjlfoy35YCdqUeIaZ8z3W7jIuMXVqmwaOnpm6229uJ2OpmNDM62CI/t6sccBsxvRfJ1OwE0qfyM72F9VI3oD0jP/t6KWC39yTi/UiAk6ID8jOFfa9uwMCeVn/2jbJ3sDC5fDYnAG1iq/qGPi4F3OzdSwM/zQlAbLX87DelgPltZj5nkKoOsSE3ceUe8QS3Fcev0k6STn0PejBiFa8UYE5+JlVkKG91zyK99r8Cmr2svuwLlQHrGhZmrOIurwvZGqRt7jc7fo/84cMVASe3iNRupLS78TTg9Iad+gJpnYPXl/IzJfGXz4NpL396y49cjgMrp/jj4lLtHbk0BZj29gJrawYcJ6U9mdzM+Mojf3fr2yhW6AqO1wGMPFS+y68CHqpZX+vIX3jM65IJFsz/Dun+mhPUFWi/wAVP/vFz5Tbhx87O5TeRSBxCWlxX7mriye837eVnkdBFMtOvcIBqsH2I26vlifj/XxD0FCeXSh5Vu4alkwuhcR/QFhEiTHaSYLxT/cOzzqBVAQvvZP4gn2h+E+mJCKu7EuAuGO+VP1x1gq8JcHrbaEliDdsRj4FizhU1jiHbVhwEatE7AU6Bbmi9mQSPgjZg5DtGIjyZ/Q7aSxAMcCY34PrFNRJgyUJaTZyFLUsgngRLYizAGAWNYhOnGR360RWq6kZdS+n/q5i6K/hvg/4NPX2LOLSlU28AAAAASUVORK5CYII=");
+            background-size: 100%;
+            vertical-align: middle;
+        }
+
+        .register span a {
+            color: orangered;
+        }
+
+        button.submit {
+            width: 100%;
+            line-height: 30px;
+            color: white;
+            background: orangered;
+            margin-top: 20px;
+        }
+        footer{
+            margin-top: 20px;
+            text-align: center;
+        }
+        footer a{
+            color: white;
+            width: 32%;
+            display: inline-block;
+        }
+        footer a:first-child{
+           cursor: default;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <header>
+            <a href="#">返回首页</a>
+            <a href="#">已有帐号？去登陆</a>
+        </header>
+        <div class="register">
+            Zoopen
+
+            <form action="post">
+                <label class="phone">
+                    <div class="box">
+                        <input type="text" placeholder="手机号码">
+                        <button>发送验证码</button>
+                    </div>
+                    <span>手机格式不正确</span>
+                </label>
+                <label class="code">
+                    <input type="text" placeholder="动态码">
+                    <span>手机格式不正确</span>
+                </label>
+                <label class="username">
+                    <input type="text" placeholder="账户名">
+                    <span>手机格式不正确</span>
+                </label>
+                <label class="password">
+                    <input type="text" placeholder="设置密码">
+                    <span>手机格式不正确</span>
+                </label>
+                <label class="repassword">
+                    <input type="text" placeholder="确认密码">
+                    <span>手机格式不正确</span>
+                </label>
+                <span>注册即同意<a href="#">《用户使用协议》</a>&<a href="#">《隐私权条款》</a></span>
+                <button class="submit">注册</button>
+            </form>
+        </div>
+        <footer>
+            <a>Zoopen</a>
+            <a href="#">联系客服</a>
+            <a href="#">帮助中心</a>
+        </footer>
+    </section>
+</body>
+
+</html>

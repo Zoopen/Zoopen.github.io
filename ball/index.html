@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>球球大作战</title>
+    <style>
+      html,
+      body {
+        /* overflow: visible; */
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+
+      .stage {
+        width: 100vw;
+        height: 100vh;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="stage">
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <script>
+      /** @type {HTMLCanvasElement} */
+      var canvas = document.querySelector("#canvas");
+      var ctx = canvas.getContext("2d");
+
+      // 可视窗口大小
+      var stage = document.querySelector(".stage");
+      var viewW = stage.offsetWidth;
+      var viewH = stage.offsetHeight;
+
+      //游戏配置
+      var gameConfig = {
+        stageW: viewW,
+        stageH: viewH,
+        center: {
+          x: viewW / 2,
+          y: viewH / 2
+        }
+      };
+
+      //画布大小
+      canvas.width = gameConfig.stageW;
+      canvas.height = gameConfig.stageH;
+
+      //背景
+      function drawBg() {
+        ctx.fillStyle = "#CCCCCC";
+        ctx.fillRect(0, 0, gameConfig.stageW, gameConfig.stageH);
+      }
+
+      // 随机颜色
+      function randomColor() {
+        var colorArr = [
+          "#CC9999",
+          "#FFFF99",
+          "#666699",
+          "#FF9900",
+          "#FFCC33",
+          "#0099CC",
+          "#CCCC99",
+          "#CC3399",
+          "#99CC00",
+          "#FF6666",
+          "#FFFF00",
+          "#FFFFCC",
+          "#FFCC99",
+          "#FF9900",
+          "#006633",
+          "#FF0033"
+        ];
+        return colorArr[Math.floor(Math.random() * colorArr.length)];
+      }
+
+      // 画球
+      function drawCircle(x, y, r, color, isfill) {
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, 2 * Math.PI);
+        ctx.closePath();
+        if (isfill) {
+          ctx.fillStyle = color;
+          ctx.fill();
+        } else {
+          ctx.strokeStyle = color;
+          ctx.stroke();
+        }
+      }
+      //随机生成m-n的整数
+      function randomNumber(m, n) {
+        return Math.round(Math.random() * (n - m) + m);
+      }
+      //随机生成m-n的浮点数
+      function randomFloat(m, n) {
+        return Math.random() * (n - m) + m;
+      }
+      //准备阶段小球配置
+      var b1 = {
+        x: gameConfig.center.x - 30,
+        y: gameConfig.center.y - 50,
+        r: 50,
+        minR: 40,
+        maxR: 50,
+        color: randomColor(),
+        //zoom为1缩小，为0放大
+        zoom: 1
+      };
+      var b2 = {
+        x: gameConfig.center.x + 20,
+        y: gameConfig.center.y - 30,
+        r: 30,
+        minR: 20,
+        maxR: 30,
+        color: randomColor(),
+        zoom: 1
+      };
+      //更新准备阶段小球两个球的大小
+      function updateBall(obj) {
+        if (obj.zoom) {
+          obj.r--;
+          if (obj.r <= obj.minR) {
+            obj.zoom = 0;
+          }
+        } else {
+          obj.r++;
+          if (obj.r >= obj.maxR) {
+            obj.zoom = 1;
+          }
+        }
+      }
+
+      var file = {
+        //开始游戏按钮配置
+        start_btn_png: {
+          sx: 2,
+          sy: 387,
+          swidth: 411,
+          sheight: 51
+        },
+        // 再次游戏按钮配置
+        again_btn_png: {
+          sx: 761,
+          sy: 221,
+          swidth: 194,
+          sheight: 69
+        },
+        //恭喜界面 成绩 图片
+        balance_base_bg_png: {
+          sx: 2,
+          sy: 2,
+          swidth: 615,
+          sheight: 385
+        },
+        //白线
+        white_line_png: {
+          sx: 2,
+          sy: 442,
+          swidth: 621,
+          sheight: 8
+        }
+      };
+      // //开始游戏按钮配置
+      // var start_btn_png = {
+      //     sx: 2,
+      //     sy: 387,
+      //     swidth: 411,
+      //     sheight: 51
+      // }
+      // //再次游戏按钮配置
+      // var again_btn_png = {
+      //     sx: 761,
+      //     sy: 221,
+      //     swidth: 194,
+      //     sheight: 69
+      // }
+
+      var img = new Image();
+      img.src = "./preloadsheet.png";
+
+      /**
+       * 画按钮的方法
+       * @param {object} obj 图片配置信息
+       * @param {string} x 图片水平方向坐标 2为居中 越大越左
+       * @param {string} y 图片垂直方向坐标
+       * @param {string} w 图片宽度
+       * @param {string} z 图片缩放比例
+       */
+      function drawBtn(obj, x, y, w, z) {
+        /**
+         * ctx.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
+         * img 图像
+         * obj.sx obj.sy从哪里开始截
+         * obj.swidth obj.sheight 截取的宽高
+         * x,y放置的位置
+         * width height放多宽多高 一般同截取的宽高一样
+         */
+        ctx.drawImage(
+          img,
+          obj.sx,
+          obj.sy,
+          obj.swidth,
+          obj.sheight,
+          gameConfig.stageW / x - (w * z) / 2,
+          y,
+          w * z,
+          (obj.sheight / obj.swidth) * w * z
+        );
+      }
+
+      //游戏准备界面
+      function readyScene() {
+        updateBall(b1);
+        updateBall(b2);
+        drawCircle(b1.x, b1.y, b1.r, b1.color, true);
+        drawCircle(b2.x, b2.y, b2.r, b2.color, true);
+        //开始按钮
+        drawBtn(file.start_btn_png, 2, gameConfig.stageH - 100, 400, 0.5);
+      }
+
+      //球球对象构造器
+      function Ball(x, y, r) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.color = randomColor();
+      }
+
+      //球球移动方法
+      Ball.prototype.move = function() {
+        // console.log("移动昂");
+        this.x += this.xspeed;
+        this.y += this.yspeed;
+      };
+      //球球检测超出的方法
+      Ball.prototype.checkOut = function() {
+        if (
+          this.x > gameConfig.stageW + this.r ||
+          this.x < -this.r ||
+          this.y < -this.r ||
+          this.y > gameConfig.stageH + this.y
+        ) {
+          return true;
+        }
+      };
+
+      // 球球数组
+      var ballArr = [];
+
+      // 确定在哪个方位创建
+      function pos() {
+        // 0,1,2,3 分别代表上右下左
+        return randomNumber(0, 3);
+      }
+      //随机生成的半径
+      function createBall() {
+        //随机球的大小应该根据我方球球变化 增加游戏体验
+        var newR = randomNumber(o.r - 5, o.r + 10);
+        //根据方位创建小球
+        switch (pos()) {
+          case 0:
+            // 上
+            var newBall = new Ball(
+              randomNumber(-newR, gameConfig.stageW + newR),
+              -newR,
+              newR
+            );
+            newBall.xspeed = randomFloat(-5, 5);
+            newBall.yspeed = randomFloat(1, 5);
+            ballArr.push(newBall);
+            break;
+          case 1:
+            //右
+            var newBall = new Ball(
+              gameConfig.stageW + newR,
+              randomNumber(-newR, gameConfig.stageH + newR),
+              newR
+            );
+            newBall.xspeed = -randomFloat(1, 5);
+            newBall.yspeed = randomFloat(-5, 5);
+            ballArr.push(newBall);
+            break;
+          case 2:
+            //下
+            var newBall = new Ball(
+              randomNumber(-newR, gameConfig.stageW + newR),
+              gameConfig.stageH + newR,
+              newR
+            );
+            newBall.xspeed = randomFloat(-5, 5);
+            newBall.yspeed = -randomFloat(1, 5);
+            ballArr.push(newBall);
+            break;
+          case 3:
+            // 左
+            var newBall = new Ball(
+              -newR,
+              randomNumber(-newR, gameConfig.stageH + newR),
+              newR
+            );
+            newBall.xspeed = randomFloat(1, 5);
+            newBall.yspeed = randomFloat(-5, 5);
+            ballArr.push(newBall);
+            break;
+        }
+
+        // drawCircle(newBall.x,newBall.y,newBall.r,randomColor(),true)
+      }
+
+      //我方球球构造器
+      function OurBall() {
+        this.x = gameConfig.center.x;
+        this.y = gameConfig.center.y;
+        this.r = 10;
+        this.color = "black";
+        //球球圆环
+        (this.loop = {
+          r: this.r,
+          minR: this.r,
+          maxR: this.r + 5,
+          color: this.color,
+          zoom: 1
+        }),
+          (this.score = 0);
+      }
+      //检测碰撞的方法
+      function checkCrash(obj) {
+        if (!obj.die) {
+          var isCrash =
+            Math.sqrt(
+              Math.abs(o.x - obj.x) * Math.abs(o.x - obj.x) +
+                Math.abs(o.y - obj.y) * Math.abs(o.y - obj.y)
+            ) <
+            o.r + obj.r;
+          if (isCrash) {
+            // console.log("撞上了");
+            return true;
+          }
+        }
+      }
+
+      var o = new OurBall();
+
+      var frames = 0;
+      //游戏开始阶段
+      function gameStart() {
+        // console.log("游戏开始");
+        ctx.clearRect(0, 0, gameConfig.stageW, gameConfig.stageH);
+        drawBg();
+
+        frames++;
+
+        //画出我方球球
+        drawCircle(o.x, o.y, o.r, o.color, true);
+        // updateBall(o.loop)
+        // drawCircle(o.x, o.y, o.loop.r, o.loop.color, false)
+
+        //每隔几帧创建一个球
+        if (frames % 5 == 0) {
+          createBall();
+          // console.log(ballArr);
+        }
+        // console.log(frames);
+        // 画出球球数组中的球 并移动
+
+        ballArr.forEach(function(e, i) {
+          //移动所有球球
+          e.move();
+
+          // 每帧检测球球
+          // if (e.checkOut()) {
+          //     ballArr.splice(i, 1)
+          // }
+          //每帧画球球
+          drawCircle(e.x, e.y, e.r, e.color, true);
+
+          // 检测碰撞
+          if (checkCrash(e)) {
+            console.log("xxxxx");
+            //判断我方半径与敌方半径
+            //我方半径大的时候，敌方死，我方加半径，圆环也要加
+            if (o.r > e.r) {
+              var addR = 0.5;
+              e.die = true;
+              o.r += addR;
+              o.loop.r += addR;
+              o.loop.minR += addR;
+              o.loop.maxR += addR;
+              o.score++;
+            } else {
+              //小于敌方半径 游戏结束
+              gameOver();
+            }
+          }
+        });
+        ballArr.forEach(function(e, i) {
+          // 每帧检测球球
+          if (e.checkOut() || e.die) {
+            ballArr.splice(i, 1);
+          }
+        });
+
+        //画出得分
+        ctx.font = "30px Arial";
+        ctx.fillStyle = o.color;
+        ctx.fillText(o.score, 10, 30);
+      }
+      //定时器
+      var gameID = setInterval(function() {
+        ctx.clearRect(0, 0, gameConfig.stageW, gameConfig.stageH);
+        drawBg();
+        readyScene();
+        if (gameConfig.start) {
+          gameStart();
+        }
+      }, 60);
+
+      function getDefeatCount() {
+        //比当前分数低的总count 包括自身
+        var lowerScoreCount = 0;
+        // 总共玩过的人数
+        var totalScoreCount = 0;
+        //击败全国x%的人 = 比当前分数低的总count/总count
+        for (var j = 0; j < oldScoreArr.length; j++) {
+          console.log(oldScoreArr[j]);
+          //找到所得分数的索引 j
+          if (oldScoreArr[j].score == o.score) {
+            // 遍历比所得分数低之前的 j-1  包括自身 j 把他们的count全部加起来
+            console.log(j - 1);
+            for (var k = 0; k <= j; k++) {
+              for (key in oldScoreArr[k]) {
+                console.log(oldScoreArr[k][key]);
+                if (key == "count") {
+                  lowerScoreCount += oldScoreArr[k][key];
+                }
+              }
+            }
+            /* -------遍历比所得分数低之前的 j-1 把他们的count全部加起来--------- */
+          }
+          //将所有count加起来
+          for (key in oldScoreArr[j]) {
+            if (key == "count") {
+              totalScoreCount += oldScoreArr[j][key];
+            }
+          }
+        }
+        console.log(lowerScoreCount);
+        console.log(totalScoreCount);
+        //击败全球%人
+        defeatCount = parseInt(
+          parseFloat((lowerScoreCount / totalScoreCount) * 100)
+        );
+
+        console.log(defeatCount);
+      }
+
+      function saveScore() {
+        //保存得分 使用localStorage存储
+        if (localStorage.getItem("score") == null) {
+          var newScore = [
+            {
+              score: o.score,
+              count: 1
+            }
+          ];
+          localStorage.setItem("score", JSON.stringify(newScore));
+          defeatCount = 100;
+        } else {
+          //遍历本地的数组对象
+          for (var i = 0; i < oldScoreArr.length; i++) {
+            for (key in oldScoreArr[i]) {
+              if (key == "score") {
+                if (oldScoreArr[i][key] == o.score) {
+                  console.log("相等");
+                  // 如果本地有这个值了，那么count++ 并且重新存储到本地
+                  oldScoreArr[i].count++;
+                  localStorage.setItem("score", JSON.stringify(oldScoreArr));
+                  getDefeatCount();
+                  return;
+                }
+              }
+            }
+          }
+          var newobj = {
+            score: o.score,
+            count: 1
+          };
+          oldScoreArr.push(newobj);
+          //排序
+          oldScoreArr.sort(function(a, b) {
+            return a.score - b.score;
+          });
+
+          localStorage.setItem("score", JSON.stringify(oldScoreArr));
+          getDefeatCount();
+        }
+      }
+      //击败全球%人
+      var defeatCount;
+      //从存储中拿数据，判断是否存在相同的
+      var oldScoreArr = JSON.parse(localStorage.getItem("score"));
+
+      //游戏结束
+      function gameOver() {
+        console.log("游戏结束");
+        gameConfig.start = false;
+        clearInterval(gameID);
+
+        setTimeout(() => {
+          //再来一次按钮
+          drawBtn(file.again_btn_png, 2, gameConfig.stageH / 2 + 100, 200, 0.7);
+          //成绩
+          drawBtn(
+            file.balance_base_bg_png,
+            2,
+            gameConfig.stageH / 2 - 200,
+            400,
+            1
+          );
+          drawBtn(file.white_line_png, 2, gameConfig.stageH / 2 + 200, 400, 1);
+          ////画出得分
+          ctx.font = "24px Arial bold";
+          ctx.fillStyle = "#fff";
+          ctx.fillText(
+            o.score,
+            gameConfig.stageW / 2 - 12,
+            gameConfig.stageH / 2 - 24
+          );
+          //不服再来 重新游戏
+          canvas.onclick = function(e) {
+            if (
+              e.offsetX >= gameConfig.stageW / 2 - (200 * 0.7) / 2 &&
+              e.offsetX <=
+                gameConfig.stageW / 2 -
+                  (200 * 0.7) / 2 +
+                  file.again_btn_png.swidth * 0.7 &&
+              e.offsetY >= gameConfig.stageH / 2 + 100 &&
+              e.offsetY <=
+                gameConfig.stageH / 2 + 100 + file.again_btn_png.sheight * 0.7
+            ) {
+              console.log(1);
+              window.location.reload();
+            }
+          };
+          //保存得分 使用localStorage存储
+          if (o.score !== 0) {
+            saveScore();
+          } else {
+            defeatCount = 0;
+          }
+          ////画出击败对手百分比
+          ctx.font = "24px Arial bold";
+          ctx.fillStyle = "#fff";
+          ctx.fillText(
+            defeatCount,
+            gameConfig.stageW / 2 + 2,
+            gameConfig.stageH / 2 + 45
+          );
+        },100);
+      }
+
+      //PC端移动事件触发
+      function moveOurPC(e) {
+        o.x = e.offsetX;
+        o.y = e.offsetY;
+      }
+      //移动端移动事件触发
+      function moveOur(e) {
+        // console.log(e);
+        o.x = e.touches[0].pageX;
+        o.y = e.touches[0].pageY;
+      }
+
+      canvas.onclick = function(e) {
+        // console.log(e);
+        if (
+          e.offsetX >= (gameConfig.stageW - gameConfig.stageW / 2) / 2 &&
+          e.offsetX <=
+            gameConfig.stageW / 2 +
+              (gameConfig.stageW - gameConfig.stageW / 2) / 2 &&
+          e.offsetY >= gameConfig.stageH - 100 &&
+          e.offsetY <=
+            gameConfig.stageH -
+              100 +
+              ((file.start_btn_png.sheight / file.start_btn_png.swidth) *
+                gameConfig.stageW) /
+                2
+        ) {
+          gameConfig.start = true;
+          if (!navigator.maxTouchPoints) {
+            canvas.onclick = function(e) {
+              // console.log(e);
+              if (
+                e.offsetX > gameConfig.stageW / 2 - o.r &&
+                e.offsetX < gameConfig.stageW / 2 + o.r &&
+                e.offsetY > gameConfig.stageH / 2 - o.r &&
+                e.offsetY < gameConfig.stageH / 2 + o.r
+              ) {
+                // console.log(1);
+                //navigator.maxTouchPoints为0时，PC端 为1移动端
+                canvas.addEventListener("mousemove", moveOurPC);
+              }
+              // canvas.addEventListener("dblclick",function () {
+              //     canvas.removeEventListener("mousemove",moveOur)
+              // })
+            };
+          } else {
+            canvas.addEventListener("touchmove", moveOur);
+          }
+        }
+      };
+    </script>
+  </body>
+</html>

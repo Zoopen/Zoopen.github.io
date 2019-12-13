@@ -1,0 +1,13 @@
+vs code 装 Easy Less 插件 然后 点击标题会跳转到其官方网站 
+在下面Project-Wide & Global Configuration 中
+复制
+{    
+    "less.compile": {
+        "compress":  true,  // true => remove surplus whitespace
+        "sourceMap": true,  // true => generate source maps (.css.map files)
+        "out":       false, // false => DON'T output .css files (overridable per-file, see below)
+    }
+}
+在vs code 中 右键该插件  配置扩展设置
+在setting.json中编辑
+将上面复制的粘贴进去 不要{} 注意每一项用逗号分开
