@@ -24,6 +24,49 @@ Game.prototype.record = document.querySelector(".record")
 Game.prototype.input = document.querySelector(".record input")
 Game.prototype.submit = document.querySelector(".submit")
 
+var bgmusic = document.querySelector(".bgmusic")
+bgmusic.loop = true
+// var bulletAudio = document.querySelector(".bulletAudio")
+// var bulletBuffAudio = document.querySelector(".bulletBuffAudio")
+// var buffAudio = document.querySelector(".buffAudio")
+// var smallAudio = document.querySelector(".smallAudio")
+// var bigAudio = document.querySelector(".bigAudio")
+// var boomAudio = document.querySelector(".boomAudio")
+// var deadAudio = document.querySelector(".deadAudio")
+// var shangbangAudio = document.querySelector(".shangbangAudio")
+
+var audioConfig = {
+    bulletAudio: "./assets/images/bullet.mp3",
+    bulletBuffAudio: "./assets/images/buffBullet.mp3",
+    buffAudio: "./assets/images/获得buff.mp3",
+    smallAudio: "./assets/images/打到小飞机.mp3",
+    bigAudio: "./assets/images/打到大飞机.mp3",
+    boomAudio: "./assets/images/飞机爆炸.mp3",
+    deadAudio: "./assets/images/gameover.mp3",
+    shangbangAudio: "./assets/images/破纪录.mp3",
+}
+
+var audioArr = []
+class Audio {
+    constructor(type) {
+        this.node = document.createElement("audio")
+        this.node.src = type
+        document.body.appendChild(this.node)
+        this.node.play()
+    }
+    // 监听是否播放完成 完成则删除
+    checkEnded() {
+        // console.log(this);
+        if (this.node.ended) {
+            return true
+        }
+    }
+
+}
+// var a = new Audio(audioConfig.bulletAudio)
+// audioArr.push(a)
+
+
 //玩家飞机配置
 Game.prototype.playerConfig = {
     path: "our-plane.gif",
@@ -152,6 +195,7 @@ game.createPlayer()
 //开始游戏
 Game.prototype.start = function () {
     p.style.opacity = "0"
+    bgmusic.play()
     //因为setInterval中的this指向window 
     //所以用that中间变量让that指代原本的this指向
     var that = this
@@ -163,6 +207,7 @@ Game.prototype.start = function () {
         that.frame++
         //根据帧数创建子弹
         if (that.frame % that.bulletFrame === 0) {
+
             //玩家创建子弹
             that.player.createBullte()
         }
@@ -186,6 +231,15 @@ Game.prototype.start = function () {
         that.scoreBoard.innerText = that.player.score
         //移动所有buff
         that.moveAllBuff()
+        // 每一帧删除播放完毕的声音
+        if (audioArr.length > 0) {
+            audioArr.forEach((element, index) => {
+                if (element.checkEnded()) {
+                    document.body.removeChild(element.node)
+                    audioArr.splice(index, 1)
+                }
+            });
+        }
 
     }, 30)
     that.state = 1
@@ -202,6 +256,7 @@ Game.prototype.start = function () {
 let p = document.querySelector(".pauseView span")
 Game.prototype.pause = function () {
     p.style.opacity = "1"
+    bgmusic.pause()
     var that = this
     clearInterval(that.intervalId)
     that.state = 0
@@ -211,6 +266,7 @@ Game.prototype.pause = function () {
 //游戏结束
 Game.prototype.gameOver = function () {
     this.pause()
+    p.style.opacity = "0"
     this.dead.style.bottom = "20%"
     this.gameScene.removeEventListener("touchstart", game.toggle)
 
@@ -271,11 +327,21 @@ Player.prototype.createBullte = function () {
     this.bullets.push(newBullet)
 
     if (this.buff) {
+        //有buff时发射子弹的声音
+        // bulletBuffAudio.play()
+        var b = new Audio(audioConfig.bulletBuffAudio)
+        audioArr.push(b)
+
         var leftB = new Bullet(this.bulletConfig, this.x - this.width / 2, this.y)
         var rightB = new Bullet(this.bulletConfig, this.x + this.width / 2, this.y)
         leftB.draw()
         rightB.draw()
         this.bullets.push(leftB, rightB)
+    } else {
+        //无buff时发射子弹的声音
+        // bulletAudio.play()
+        var a = new Audio(audioConfig.bulletAudio)
+        audioArr.push(a)
     }
 }
 
@@ -351,6 +417,15 @@ Game.prototype.checkAllCrash = function () {
             if (enemy.checkCrash(bullet)) {
                 enemy.blood--
                 bullet.blood--
+                if (enemy.score == 1) {
+                    // smallAudio.play()
+                    var a = new Audio(audioConfig.smallAudio)
+                    audioArr.push(a)
+                } else {
+                    // bigAudio.play()
+                    var b = new Audio(audioConfig.bigAudio)
+                    audioArr.push(b)
+                }
                 // console.log("xxx");
 
             }
@@ -368,6 +443,9 @@ Game.prototype.checkAllCrash = function () {
             console.log(this.player.buff);
 
             if (!this.player.buff) { //false
+                // buffAudio.play()
+                var a = new Audio(audioConfig.buffAudio)
+                audioArr.push(a)
                 this.player.buff = true
                 this.gameScene.removeChild(buff.node)
                 buffs.splice(ib, 1)
@@ -399,6 +477,9 @@ Game.prototype.checkAllDeath = function () {
             this.player.score += enemy.score
             //并换上爆炸图片
             enemy.node.src = this.srcPath + enemy.boom
+            // boomAudio.play()
+            var a = new Audio(audioConfig.boomAudio)
+            audioArr.push(a)
 
 
         }
@@ -416,7 +497,9 @@ Game.prototype.checkAllDeath = function () {
     if (this.player.blood <= 0 && !this.player.die) {
         this.player.die = true
         this.player.node.src = this.srcPath + this.player.boom
-
+        // deadAudio.play()
+        var a = new Audio(audioConfig.deadAudio)
+        audioArr.push(a)
     }
 }
 //移除所有死亡
@@ -463,42 +546,64 @@ var oldScoreArr = ""
 var defeatCount = 0
 
 function getDefeatCount() {
-    //比当前分数低的总count 包括自身
+    //比当前分数低的总count 
     var lowerScoreCount = 0;
     // 总共玩过的人数
     var totalScoreCount = 0;
     //击败全国x%的人 = 比当前分数低的总count/总count
-    for (var j = 0; j < oldScoreArr.length; j++) {
-        console.log(oldScoreArr[j]);
-        //找到所得分数的索引 j
-        if (oldScoreArr[j].score == game.player.score) {
-            // 遍历比所得分数低之前的 j-1  包括自身 j 把他们的count全部加起来
-            console.log(j - 1);
-            for (var k = 0; k <= j; k++) {
-                for (key in oldScoreArr[k]) {
-                    console.log(oldScoreArr[k][key]);
-                    if (key == "count") {
-                        lowerScoreCount += oldScoreArr[k][key];
-                    }
-                }
-            }
-            /* -------遍历比所得分数低之前的 j-1 把他们的count全部加起来--------- */
-        }
-        //将所有count加起来
+    console.log(oldScoreArr);
+    //将所有count加起来
+    for (let j = 0; j < oldScoreArr.length; j++) {
         for (key in oldScoreArr[j]) {
             if (key == "count") {
                 totalScoreCount += oldScoreArr[j][key];
             }
         }
     }
-    console.log(lowerScoreCount);
-    console.log(totalScoreCount);
-    //击败全球%人
-    defeatCount = parseInt(
-        parseFloat((lowerScoreCount / totalScoreCount) * 100)
-    );
 
-    console.log(defeatCount);
+    //计算击败的人数
+    for (var j = oldScoreArr.length - 1; j > 0; j--) {
+
+        console.log(oldScoreArr[j]);
+        if (oldScoreArr[j].score == game.player.score) {
+            console.log(j);
+            for (var i = 0; i <= j; i++) {
+                for (key in oldScoreArr[i]) {
+                    if (key == "count") {
+                        console.log(oldScoreArr[i][key]);
+                        lowerScoreCount += oldScoreArr[i][key];
+                    }
+                }
+            }
+            console.log(lowerScoreCount);
+            console.log(totalScoreCount);
+            //击败全球%人
+            defeatCount = parseInt(
+                parseFloat((lowerScoreCount / totalScoreCount) * 100)
+            );
+
+            console.log(defeatCount);
+            return
+        }
+
+
+        // //找到所得分数的索引 j
+        // if (oldScoreArr[j].score == game.player.score) {
+        //     // 遍历比所得分数低之前的 j-1  包括自身 j 把他们的count全部加起来
+        //     console.log(j - 1);
+        //     for (var k = 0; k <= j; k++) {
+        //         for (key in oldScoreArr[k]) {
+        //             console.log(oldScoreArr[k][key]);
+        //             if (key == "count") {
+        //                 lowerScoreCount += oldScoreArr[k][key];
+        //             }
+        //         }
+        //     }
+        //     /* -------遍历比所得分数低之前的 j-1 把他们的count全部加起来--------- */
+        // }
+
+    }
+
 }
 // 保存分数
 function saveScore(nickname) {
@@ -517,8 +622,17 @@ function saveScore(nickname) {
                 if (key == "score") {
                     if (oldScoreArr[i][key] == game.player.score) {
                         console.log("相等");
-                        // 如果本地有这个值了，那么count++ 并且重新存储到本地
-                        oldScoreArr[i].count++;
+                        var newobj = {
+                            score: game.player.score,
+                            count: 1,
+                            nick: nickname
+                        };
+                        oldScoreArr.push(newobj);
+                        //排序
+                        oldScoreArr.sort(function (a, b) {
+                            return a.score - b.score;
+                        });
+
                         localStorage.setItem("score", JSON.stringify(oldScoreArr));
                         getDefeatCount();
                         return;
@@ -577,15 +691,15 @@ Game.prototype.restart = function (e) {
     var that = game
     that.dead.style.bottom = -that.dead.offsetHeight + "px"
     console.log(that);
-
+    alert(`${localStorage.getItem("score")}`)
     // e.stopPropagation();
     // e.preventDefault();
     console.log("重新开始");
+    if (that.player.score >= bangdan[bangdan.length - 1].score) {
 
-    if (game.player.score > bangdan[bangdan.length - 1].score) {
         // 记录以下名字分数
         that.record.style.left = "0"
-        that.submit.addEventListener("touchend", game.subInfo)
+        that.submit.addEventListener("touchend", that.subInfo)
 
     } else {
         saveScore("未上榜")
@@ -603,6 +717,9 @@ Game.prototype.restart = function (e) {
 
 function shangbang() {
     console.log("恭喜上榜了");
+    // shangbangAudio.play()
+    var a = new Audio(audioConfig.shangbangAudio)
+    audioArr.push(a)
     sbtext.innerHTML = "恭喜上榜了!"
 }
 
@@ -672,7 +789,9 @@ function setDefautScore() {
 function again() {
     window.location.reload()
 }
-onload = function () {
+// 初始化
+window.onload = init()
+function init() {
     oldScoreArr = JSON.parse(localStorage.getItem("score"));
     console.log(oldScoreArr);
     // 如果现有数组小于3 给默认
@@ -683,6 +802,7 @@ onload = function () {
     oldScoreArr = JSON.parse(localStorage.getItem("score"));
     getBangdan()
 }
+init()
 // 把分数传到榜单上
 function drawScore() {
     var trs = game.ranking.querySelectorAll(".ranking .ranking-score")

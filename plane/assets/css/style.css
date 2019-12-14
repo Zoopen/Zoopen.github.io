@@ -8,7 +8,7 @@ body {
 .stage {
   width: 200%;
   height: 100%;
-  background: red;
+  background: lightgray;
   transition: all 0.3s;
 }
 .stage .startScene {
