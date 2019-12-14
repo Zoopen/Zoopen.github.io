@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>轮播图插件</title>
+    <link rel="stylesheet" href="./css/swiper.css" />
+  </head>
+
+  <body>
+    <div class="swiper-wrap">
+      <h1>封装轮播图插件</h1>
+      <div class="swiper-container aaa">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="./img/t1.png" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="./img/t2.png" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="./img/t3.png" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="./img/t4.png" alt="" />
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <!-- <a href="javasript:alert('抢购结束!')">立即抢购</a> -->
+
+        <!-- <div class="swiper-scrollbar"></div> -->
+      </div>
+
+      <div class="swiper-container bbb">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="./img/t1.png" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="./img/t2.png" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="./img/t3.png" alt="" />
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+      <div class="swiper-container ccc">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="./img/t1.png" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="./img/t2.png" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="./img/t3.png" alt="" />
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+      <div class="swiper-container ddd">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="./img/t1.png" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="./img/t2.png" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="./img/t3.png" alt="" />
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+    <script src="./js/swiper.js"></script>
+    <script>
+      var s1 = new MySwiper(".aaa", {
+        pagination: true
+      });
+      var s2 = new MySwiper(".bbb", {
+        currentPage: 3,
+        pagination: true
+      });
+      var s3 = new MySwiper(".ccc", {
+        autoplay: true,
+        pagination: true
+      });
+      var s4 = new MySwiper(".ddd", {
+        autoplay: true,
+        delay: 5000,
+        pagination: true,
+        nextBack: true
+      });
+
+      /*new MySwiper(".className",params)
+            第一个参数".className"必须
+            第二参数params可选，为一个对象
+            pagination: true 添加点点
+            autoplay: true 自动播放
+            delay: 5000 自动播放速度，需配合autoplay使用
+            current: 1 开始页码
+            nextBack: true 添加前后按钮
+        */
+    </script>
+
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        background-image: linear-gradient(19deg, #21d4fd, #b721ff);
+        width: 100%;
+        /* height: 100vh; */
+        overflow-x: hidden;
+      }
+      .accordion {
+        width: 800px;
+        margin: 0 auto;
+        padding-bottom: 80px;
+      }
+      .accordion h1 {
+        margin: 20px;
+        padding: 0;
+      }
+      .accordion .stage {
+        width: 800px;
+        margin: 0 auto;
+        /* background: lightcoral; */
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+      }
+
+      .accordion .stage img {
+        width: 80%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        vertical-align: middle;
+        transition: all 1s;
+        border-radius: 8px;
+        border-left: 1px solid rgba(0, 0, 0, 0.5);
+      }
+
+      .accordion .stage img:first-child {
+        position: static;
+      }
+      .accordion .controler {
+        text-align: center;
+        margin-top: 10px;
+      }
+      .accordion .controler button {
+        outline: none;
+        border: none;
+        transition: all 0.6s;
+        border: 1px solid black;
+        border-radius: 4px;
+        padding: 4px 20px;
+        font-weight: bold;
+      }
+      .accordion .controler button:hover {
+        background: orangered;
+        color: #fff;
+      }
+    </style>
+    <!-- 手风琴 -->
+    <div class="accordion">
+      <h1>横向手风琴</h1>
+      <div class="stage">
+        <img src="./img/t1.png" alt="" />
+        <img src="./img/t2.png" alt="" />
+        <img src="./img/t3.png" alt="" />
+        <img src="./img/t4.png" alt="" />
+        <img src="./img/t5.png" alt="" />
+        <img src="./img/t6.png" alt="" />
+        <img src="./img/t7.png" alt="" />
+      </div>
+      <div class="controler">
+        <button>添加一张图片</button>
+        <button>移除一张图片</button>
+      </div>
+    </div>
+    <script>
+      var stage = document.querySelector(".accordion .stage");
+      var imgs = document.querySelectorAll(".accordion .stage img");
+      //舞台宽度
+      var stageWidth = stage.offsetWidth;
+      // 单张图片宽度
+      var imgWidth = imgs[0].offsetWidth;
+      function init() {
+        imgs = document.querySelectorAll(".accordion .stage img");
+        //图片个数
+        var imgsCount = imgs.length;
+        //收缩起来的宽度 = (舞台宽度-单张图片宽度)/图片个数-1
+        var closeWidth = (stageWidth - imgWidth) / (imgsCount - 1);
+
+        for (var i = 0; i < imgsCount; i++) {
+          //初始化时个图片的起始位置 每个图片的下标*舞台宽度/图片个数
+          imgs[i].style.left = (stageWidth / imgsCount) * i + "px";
+          //this.xxx 当前指上去的图片的坐标
+          imgs[i].xxx = i;
+          imgs[i].onmouseover = function() {
+            // console.log(this.xxx);
+            for (var j = 0; j < imgsCount; j++) {
+              if (j <= this.xxx) {
+                //当图片下标小于指上去的图片下标的时候 他的位置为 其下标*缩起来的宽度
+                imgs[j].style.left = j * closeWidth + "px";
+              } else {
+                //当图片下标大于指上去的图片下标的时候 他的位置为 （其下标-1）*收缩起来的宽度 + 单张图片宽度
+                imgs[j].style.left = (j - 1) * closeWidth + imgWidth + "px";
+              }
+            }
+          };
+          imgs[i].onmouseout = function() {
+            for (var j = 0; j < imgsCount; j++) {
+              imgs[j].style.left = (stageWidth / imgsCount) * j + "px";
+            }
+          };
+        }
+      }
+      init();
+      var btn = document.querySelectorAll(".accordion .controler button")[0];
+      var btn2 = document.querySelectorAll(".accordion .controler button")[1];
+      btn.onclick = function() {
+        createNewImage();
+        init();
+      };
+      btn2.onclick = function() {
+        removeImage();
+        init();
+      };
+      function createNewImage() {
+        var node = document.createElement("img");
+        node.src = randomImage();
+        stage.appendChild(node);
+      }
+      function randomImage() {
+        var imgArr = [
+          "./img/t1.png",
+          "./img/t2.png",
+          "./img/t3.png",
+          "./img/t4.png",
+          "./img/t5.png",
+          "./img/t6.png",
+          "./img/t7.png"
+        ];
+        return imgArr[randomNum(0, 7)];
+      }
+      function randomNum(m, n) {
+        return Math.floor(Math.random() * (n - m) + m);
+      }
+      function removeImage() {
+        var lastImg = stage.lastElementChild;
+        console.log(lastImg);
+        stage.removeChild(lastImg);
+      }
+    </script>
+  </body>
+</html>

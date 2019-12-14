@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>转盘抽奖</title>
+    <style>
+        body{
+            background: rgb(255, 196, 10);
+        }
+        .stage {
+            width: 650px;
+            height: 600px;
+            margin: 0 auto;
+            background: url("./img/turntable-bg.jpg") no-repeat;
+            position: relative;
+        }
+
+        img {
+            position: absolute;
+        }
+
+        .turntable {
+            top: 61px;
+            left: 117px;
+            /* transform: rotate(360deg); */
+            /* transition: all 3s; */
+        }
+
+        .pointer {
+            top: 150px;
+            left: 249px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stage">
+        <img class="turntable" src="./img/turntable.png" alt="">
+        <img class="pointer" src="./img/pointer.png" alt="">
+    </div>
+    <script>
+        var turntable = document.getElementsByClassName("turntable")[0];
+        var pointer = document.getElementsByClassName("pointer")[0];
+        turntable.style.transform = "rotate(" + (360 / 7 / 2) + "deg)"
+        pointer.onclick = function () {
+            var randomNum = produceRandomNum()
+            console.log(randomNum);
+            var PriceObj = PricePool(randomNum)
+            console.log(PriceObj);
+            //因为每次都会清除过渡 这里新建过渡效果
+            turntable.style.transition = "all 3s"
+            rotateTurnTable(PriceObj)
+        }
+        //生成一个0-99的随机数
+        var produceRandomNum = function () {
+            return Math.floor(Math.random() * 100)
+        }
+        //根据随机数返回中奖对象
+        var PricePool = function (n) {
+            if (n < 3) {
+                return {
+                    code: 1,
+                    text: "一等奖"
+                }
+            } else if (n < 8) {
+                return {
+                    code: 2,
+                    text: "二等奖"
+                }
+            } else if (n < 15) {
+                return {
+                    code: 3,
+                    text: "三等奖"
+                }
+            } else if (n < 25) {
+                return {
+                    code: 4,
+                    text: "四等奖"
+                }
+            } else if (n < 40) {
+                return {
+                    code: 5,
+                    text: "五等奖"
+                }
+            } else if (n < 65) {
+                return {
+                    code: 6,
+                    text: "六等奖"
+                }
+            } else {
+                return {
+                    code: 7,
+                    text: "未中奖"
+                }
+            }
+        }
+        //偏移量 360/7/2 让指针指在中间  每次再转的时候为（360/7）*obj-1
+        var rotateTurnTable = function (obj) {
+            var x =(360 / 7 / 2) + (360 / 7) * (obj.code - 1);
+            //为了保证顺时针转动，加转三圈
+            turntable.style.transform = "rotate(" + (x + 360 * 3) + "deg)";
+
+            //每次转完清除加转的三圈 同时也要清除过渡效果 
+            setTimeout(function(){
+                // console.log("1");
+                turntable.style.transform = "rotate(" + x + "deg)"
+                turntable.style.transition = "none"
+                alert(obj.text)
+            },3000)
+        }
+    </script>
+</body>
+
+</html>
