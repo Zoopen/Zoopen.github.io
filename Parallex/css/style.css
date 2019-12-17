@@ -1,0 +1,95 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(#c5426e, #6c2d73);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+.stage {
+  width: 600px;
+  height: 400px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.5);
+  padding: 30px 35px;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg) rotateX(0deg);
+}
+.stage h3 {
+  color: #eb285d;
+  margin: 16px 0 6px 0;
+  transform: translateZ(5px);
+}
+.stage h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin: 24px 0 30px 0;
+  transform: translateZ(10px);
+  color: #3e3e42;
+}
+.stage .cards {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  transform: translateZ(20px);
+}
+.stage .cards .card {
+  flex: 1;
+  margin-right: 20px;
+  border-radius: 15px;
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  perspective: 100px;
+  transform-style: preserve-3d;
+  perspective-origin: 15% 9%;
+  box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.6);
+  background-repeat: no-repeat;
+  background-size: 120% 150%;
+  background-position: 50% 50%;
+}
+.stage .cards .card:last-child {
+  margin-right: 0;
+}
+.stage .cards .card img {
+  height: 100%;
+  position: relative;
+  transform: translateZ(10px);
+}
+.stage .cards .card.card-one {
+  background-image: url("../img/bg1.jpg");
+}
+.stage .cards .card.card-two {
+  background-image: url("../img/bg2.jpg");
+}
+.stage .cards .card.card-two img {
+  top: 20px;
+}
+.stage .cards .card.card-three {
+  background-image: url("../img/bg3.jpg");
+}
+.stage .cards .card .card-text {
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 100%);
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  height: 70px;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+}
+.stage .cards .card .card-text p {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 0 10px;
+  margin-bottom: 3px;
+}
+/*# sourceMappingURL=./style.css.map */

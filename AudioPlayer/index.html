@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <!-- 音乐播放器 -->
+    <div class="music-player">
+        <audio class="music-player-audio" src="./songs/GIN - 願桜.mp3"></audio>
+        <!-- 播放器主体 -->
+        <div class="music-player-main">
+            <!-- 遮罩模糊 -->
+            <div class="music-player-blur"></div>
+            <!-- 唱片 -->
+            <div class="music-player-disc">
+                <!-- 唱片图片 -->
+                <div class="music-player-image">
+                    <img src="./img/Rise.jpg" alt="">
+                </div>
+                <!-- 指针 -->
+                <div class="music-player-pointer">
+                    <img src="./img/cd_tou.png" alt="">
+                </div>
+            </div>
+            <!-- 控件主体 -->
+            <div class="music-player-controls">
+                <!-- 歌曲信息 -->
+                <div class="music-info">
+                    <h3 class="music-info-title">歌曲名称</h3>
+                    <p class="music-info-singer">歌手名称</p>
+                </div>
+                <!-- 控件 -->
+                <div class="player-control">
+                    <div class="player-control-content">
+                        <div class="player-control-btns">
+                            <div class="player-control-btn player-control-btn-prev"></div>
+                            <div class="player-control-btn player-control-btn-play"></div>
+                            <div class="player-control-btn player-control-btn-next"></div>
+                            <div class="player-control-btn player-control-btn-mode"></div>
+                        </div>
+                        <div class="player-control-volume">
+                            <div class="player-control-volume-icon player-control-btn"></div>
+                            <div class="player-control-volume-progress progress">
+                                <div class="back"></div>
+                                <div class="pointer"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 歌曲播放进度 -->
+                    <div class="player-control-content">
+                        <div class="player-song-progress progress">
+                                <div class="back"></div>
+                                <div class="pointer"></div>
+                        </div>
+                        <div class="player-song-timeProgress nowTime">00:00</div>
+                        <div class="player-song-timeProgress totalTime">00:00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 歌曲列表 -->
+        <div class="music-player-list">
+            <ul class="music-list-content">
+                <!-- <li class="music-list-item play">Rise</li>
+                <li class="music-list-item">願桜</li>
+                <li class="music-list-item">いのちの名前</li> -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script> -->
+    <script src="./js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,318 @@
+body {
+    // background: #1b1b1b;
+    padding: 0;
+    margin: 0;
+    background-color: #D9AFD9;
+    background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+    height: 100vh;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img {
+    display: block;
+}
+
+h3,
+p,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.music-player {
+    width: 550px;
+    // margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+
+    // audio标签
+    .music-player-audio {}
+
+    // 播放器主体
+    .music-player-main {
+        height: 180px;
+        box-shadow: 0 0 40px 0 rgba(0, 0, 0, .8);
+        border-radius: 10px;
+        position: relative;
+        padding: 25px;
+
+        overflow: hidden;
+
+        // 遮罩
+        .music-player-blur {
+            width: 100%;
+            height: 100%;
+            background-image: url("../img/Rise.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            filter: blur(5px);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            &:after{
+                content:"";
+                display: block;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(28, 4, 4, .4);
+            }
+        }
+
+        //唱片
+        .music-player-disc {
+            width: 130px;
+            height: 130px;
+            background-image: url("../img/cd.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            float: left;
+            position: relative;
+
+            .music-player-image {
+                width: 80px;
+                height: 80px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+
+                img {
+                    width: 100%;
+                    border-radius: 50%;
+                }
+            }
+
+            // 指针 
+            .music-player-pointer {
+                position: absolute;
+                top: 0;
+                left: 88%;
+                width: 20px;
+                transform-origin: top right;
+                transform: rotate(-23deg);
+                transition: all .3s;
+
+                &.play {
+                    transform: rotate(0deg);
+                }
+
+                img {
+                    width: 100%;
+                }
+            }
+        }
+
+        //控件主体
+        .music-player-controls {
+            width: 330px;
+            height: 130px;
+            float: right;
+
+            //歌曲信息
+            .music-info {
+                width: 100%;
+                height: 50px;
+                margin-bottom: 15px;
+
+                h3 {
+                    color: #fff;
+                }
+
+                p {
+                    color: #ccc;
+                }
+            }
+
+            //控件
+            .player-control {
+                width: 100%;
+                height: 70px;
+
+                .progress {
+                    background: rgba(0, 0, 0, .3);
+                    height: 5px;
+                    border-radius: 2px;
+                    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .5) inset;
+                }
+
+                .player-control-content {
+                    height: 20px;
+                    margin-bottom: 10px;
+
+                    .player-control-btn {
+                        float: left;
+                        width: 20px;
+                        height: 20px;
+                        background-size: 100%;
+                        cursor: pointer;
+                        margin: 0 5px;
+                    }
+
+                    .player-control-btns {
+                        // width: 100%;
+                        height: 20px;
+                        float: left;
+
+                        .player-control-btn-prev {
+                            background-image: url("../img/ios-skip-backward.svg");
+                        }
+
+                        .player-control-btn-play {
+                            background-image: url("../img/ios-play.svg");
+
+                        }
+
+                        .player-control-btn-next {
+                            background-image: url("../img/ios-skip-forward.svg");
+
+                        }
+
+                        .player-control-btn-mode {
+                            background-image: url("../img/ios-repeat.svg");
+
+                        }
+                    }
+
+                    // 音量控件
+                    .player-control-volume {
+                        float: right;
+
+                        .player-control-volume-icon {
+                            background-image: url("../img/ios-volume-high.svg");
+                        }
+
+                        .player-control-volume-progress {
+                            width: 100px;
+                            float: left;
+                            position: relative;
+                            top: 8px;
+                            cursor: pointer;
+
+                            .back {
+                                width: 50px;
+                                height: 100%;
+                                border-radius: 2px;
+                                background: rgba(4, 255, 171, 0.774);
+                                transition: all .3s;
+
+                            }
+
+                            .pointer {
+                                width: 7px;
+                                height: 7px;
+                                border-radius: 50%;
+                                background: white;
+                                position: absolute;
+                                top: -1px;
+                                left: 50px;
+                                cursor: pointer;
+                                pointer-events: none;
+                                transition: all .3s;
+
+                            }
+                        }
+                    }
+
+                    // 歌曲播放进度
+                    .player-song-progress {
+                        margin-top: 15px;
+                        position: relative;
+                        cursor: pointer;
+
+                        .back {
+                            width: 0px;
+                            height: 100%;
+                            border-radius: 2px;
+                            background: rgba(4, 255, 171, 0.774);
+                            transition: all .3s;
+                        }
+
+                        .pointer {
+                            width: 7px;
+                            height: 7px;
+                            border-radius: 50%;
+                            background: white;
+                            position: absolute;
+                            top: -1px;
+                            left: 0px;
+                            cursor: pointer;
+                            pointer-events: none;
+                            transition: all .3s;
+
+                        }
+                    }
+
+                    .player-song-timeProgress {
+                        font-size: 12px;
+                        color: #fff;
+                        margin-top: 5px;
+                        padding: 0 3px;
+                        background: rgba(0, 0, 0, .3);
+                        border-radius: 5px;
+                    }
+
+                    .nowTime {
+                        float: left;
+                    }
+
+                    .totalTime {
+                        float: right;
+                    }
+
+                }
+            }
+
+        }
+
+
+    }
+
+    // 歌曲列表
+    .music-player-list {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        background: rgba(0, 0, 0, .5);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, .5);
+        border-radius: 5px;
+
+        .music-list-content {
+            .music-list-item {
+                color: #ccc;
+                margin-bottom: 10px;
+                font-size: 14px;
+                padding-left: 25px;
+                cursor: pointer;
+                position: relative;
+            }
+
+            .music-list-item.play {
+                color: #fff;
+
+                &::before {
+                    content: "";
+                    background-image: url("../img/ios-volume-high.svg");
+                    background-size: 100%;
+                    width: 20px;
+                    height: 20px;
+                    position: absolute;
+                    top: 0px;
+                    left: 0;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Loading</title>
+    <style>
+      h1 {
+        color: white;
+      }
+
+      div {
+        display: inline-block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>SVG</h1>
+    <!-- 播放 -->
+    <svg
+      width="50"
+      height="50"
+      viewBox="0 0 120 120"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <rect x="5" y="40" width="20" height="120" style="fill: lightcoral;">
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="translate"
+          values="0 120; 0 20;0 60;0 0;0 90;0 120"
+          dur="1s"
+          repeatCount="indefinite"
+        />
+      </rect>
+      <rect x="35" y="20" width="20" height="120" style="fill: lightcoral;">
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="translate"
+          values="0 120; 0 20;0 60;0 0;0 90;0 120"
+          begin="0.6s"
+          dur="1s"
+          repeatCount="indefinite"
+        />
+      </rect>
+      <rect x="65" y="20" width="20" height="120" style="fill: lightcoral;">
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="translate"
+          values="0 120; 0 20;0 60;0 0;0 90;0 120"
+          begin="0.8s"
+          dur="1s"
+          repeatCount="indefinite"
+        />
+      </rect>
+      <rect x="95" y="60" width="20" height="120" style="fill: lightcoral;">
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="translate"
+          values="0 120; 0 20;0 60;0 0;0 90;0 120"
+          begin="0.3s"
+          dur="1s"
+          repeatCount="indefinite"
+        />
+      </rect>
+    </svg>
+    <!-- 轨道 -->
+    <svg
+      width="100"
+      height="100"
+      viewBox="0 0 100 100"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <circle cx="50" cy="50" r="5" style="fill: lightcoral;"></circle>
+      <circle
+        cx="50"
+        cy="50"
+        r="15"
+        style="stroke: rgb(255, 136, 1);stroke-width: 1;fill: none;"
+      ></circle>
+      <circle cx="50" cy="35" r="2" style="fill: rgb(206, 206, 206);">
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="rotate"
+          from="0 50 50"
+          to="360 50 50"
+          dur="1s"
+          repeatCount="indefinite"
+        />
+      </circle>
+      <circle
+        cx="50"
+        cy="50"
+        r="30"
+        style="stroke: rgb(235, 68, 68);stroke-width: 1;fill: none;"
+      ></circle>
+      <circle cx="80" cy="50" r="3" style="fill: rgb(243, 13, 243);">
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="rotate"
+          from="0 50 50"
+          to="360 50 50"
+          dur="3s"
+          repeatCount="indefinite"
+        />
+      </circle>
+      <circle
+        cx="50"
+        cy="50"
+        r="40"
+        style="stroke: rgb(140, 134, 165);stroke-width: 1;fill: none;"
+      ></circle>
+      <circle cx="10" cy="50" r="5" style="fill: rgb(107, 193, 196);">
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="rotate"
+          from="0 50 50"
+          to="360 50 50"
+          dur="5s"
+          repeatCount="indefinite"
+        />
+      </circle>
+    </svg>
+    <!-- 三个点Loading -->
+    <svg
+      width="100"
+      height="100"
+      viewBox="0 0 90 90"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <circle cx="15" cy="45" r="3" style="fill: lightseagreen;opacity: 1;">
+        <!-- 重复-->
+        <animate
+          id="r1"
+          attributeType="XML"
+          attributeName="r"
+          from="3"
+          to="5"
+          begin="0s;r1.end + 0.6s"
+          dur="0.6s"
+        />
+        <animate
+          id="r2"
+          attributeType="XML"
+          attributeName="r"
+          from="5"
+          to="3"
+          begin="0.6s;r2.end + 0.6s"
+          dur="0.6s"
+        />
+        <animate
+          id="op1"
+          attributeType="XML"
+          attributeName="opacity"
+          from="0.2"
+          to="1"
+          begin="0s;op1.end + 0.6s"
+          dur="0.6s"
+        />
+        <animate
+          id="op2"
+          attributeType="XML"
+          attributeName="opacity"
+          from="1"
+          to="0.2"
+          begin="0.6s;op2.end + 0.6s"
+          dur="0.6s"
+        />
+      </circle>
+      <circle cx="45" cy="45" r="3" style="fill: lightseagreen;">
+        <animate
+          id="r1"
+          attributeType="XML"
+          attributeName="r"
+          from="3"
+          to="5"
+          begin="0.2s;r1.end + 0.8s"
+          dur="0.6s"
+        />
+        <animate
+          id="r2"
+          attributeType="XML"
+          attributeName="r"
+          from="5"
+          to="3"
+          begin="0.8s;r2.end + 0.8s"
+          dur="0.6s"
+        />
+        <animate
+          id="op1"
+          attributeType="XML"
+          attributeName="opacity"
+          from="0.2"
+          to="1"
+          begin="0.2s;op1.end + 0.8s"
+          dur="0.6s"
+        />
+        <animate
+          id="op2"
+          attributeType="XML"
+          attributeName="opacity"
+          from="1"
+          to="0.2"
+          begin="0.8s;op2.end + 0.8s"
+          dur="0.6s"
+        />
+      </circle>
+      <circle cx="75" cy="45" r="3" style="fill: lightseagreen;">
+        <animate
+          id="r1"
+          attributeType="XML"
+          attributeName="r"
+          from="3"
+          to="5"
+          begin="0.4s;r1.end + 1s"
+          dur="0.6s"
+        />
+        <animate
+          id="r2"
+          attributeType="XML"
+          attributeName="r"
+          from="5"
+          to="3"
+          begin="0.4s;r2.end + 1s"
+          dur="0.6s"
+        />
+        <animate
+          id="op1"
+          attributeType="XML"
+          attributeName="opacity"
+          from="0.2"
+          to="1"
+          begin="0.4s;op1.end + 1s"
+          dur="0.6s"
+        />
+        <animate
+          id="op2"
+          attributeType="XML"
+          attributeName="opacity"
+          from="1"
+          to="0.2"
+          begin="1s;op2.end + 1s"
+          dur="0.6s"
+        />
+      </circle>
+    </svg>
+
+    <!-- 文字旋转 -->
+    <svg
+      width="100"
+      height="100"
+      viewBox="0 0 100 100"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <!-- <circle cx="50" cy="50" r="30" style="stroke:#333;stroke-width:1px;fill:none"/> -->
+      <path
+        id="MyPath"
+        d="M20 50 a30,30 0,0,1,60,0 a30,30,0,0,1,-60,0"
+        fill="none"
+        stroke="#333"
+        stroke-width="0px"
+      />
+
+      <text x="10" y="10" style="fill: lightcoral;" class="loading1">
+        <textPath xlink:href="#MyPath">
+          loading
+        </textPath>
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="rotate"
+          from="0 50 50"
+          to="360 50 50"
+          dur="10s"
+          repeatCount="indefinite"
+        />
+      </text>
+      <text x="100" y="10" style="fill: lightcoral;" class="loading1">
+        <textPath xlink:href="#MyPath">
+          loading
+        </textPath>
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="rotate"
+          from="0 50 50"
+          to="360 50 50"
+          dur="10s"
+          repeatCount="indefinite"
+        />
+      </text>
+    </svg>
+    <style>
+      .loading1 {
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+    </style>
+
+    <hr />
+    <style>
+      html,
+      body {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+      ul.cssContent {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        width: 780px;
+        margin: auto;
+        box-sizing: border-box;
+      }
+      ul.cssContent li {
+        background: transparent;
+        box-sizing: border-box;
+        /* border: 1px solid black; */
+        width: 250px;
+        height: 250px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        position: relative;
+        text-align: center;
+      }
+    </style>
+    <h1>CSS3</h1>
+    <ul class="cssContent">
+      <li>
+        <!-- 两个小方块 -->
+        <div class="rect-box"></div>
+      </li>
+      <li>
+        <!-- 精灵球 -->
+        <div class="ball-loading">
+          <div class="ball">
+            <div class="ball-top"></div>
+            <div class="ball-middle"></div>
+            <div class="ball-bottom"></div>
+          </div>
+          <div class="ball-shadow"></div>
+        </div>
+      </li>
+      <li>
+        <!-- 缩放旋转变形loading -->
+        <div class="loader2">
+          <span class="loader2-text">LOADING</span>
+          <span class="loader2-core"></span>
+        </div>
+      </li>
+      <li>
+        <!-- 发光线条旋转loading -->
+        <div class="loader">
+          <div class="loader-core1"></div>
+          <div class="loader-core2"></div>
+        </div>
+      </li>
+      <li>
+        <div class="loading">
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <!-- circle渐变loading -->
+        <div class="circle-loading">
+          <div class="circle-core"></div>
+        </div>
+      </li>
+      <li>
+        <div class="loadText">
+          <p>l</p>
+          <p>o</p>
+          <p>a</p>
+          <p>d</p>
+          <p>i</p>
+          <p>n</p>
+          <p>g</p>
+        </div>
+      </li>
+      <li>
+        <!-- 齿轮loading -->
+        <div class="loading2">
+          <div class="gear gear-top">
+            <div class="piece"></div>
+            <div class="piece"></div>
+            <div class="piece"></div>
+            <div class="hole"></div>
+          </div>
+          <div class="gear gear-left">
+            <div class="piece"></div>
+            <div class="piece"></div>
+            <div class="piece"></div>
+            <div class="hole"></div>
+          </div>
+          <div class="gear gear-right">
+            <div class="piece"></div>
+            <div class="piece"></div>
+            <div class="piece"></div>
+            <div class="hole"></div>
+          </div>
+          <div class="mask"></div>
+          <p>Loading...</p>
+        </div>
+      </li>
+      <li>
+        <!-- 螺旋loading -->
+        <div class="shaft-load11">
+      <div class="shaft1"></div>
+      <div class="shaft2"></div>
+      <div class="shaft3"></div>
+      <div class="shaft4"></div>
+      <div class="shaft5"></div>
+      <div class="shaft6"></div>
+      <div class="shaft7"></div>
+      <div class="shaft8"></div>
+      <div class="shaft9"></div>
+      <div class="shaft10"></div>
+    </div>
+      </li>
+    </ul>
+    <!-- css3两个盒子-->
+    <style>
+      body {
+        background: #37474f;
+      }
+
+      .rect-box {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -50px;
+        margin-top: -50px;
+        box-shadow: 0 0 0px 4px lightseagreen;
+        color: white;
+        animation: rotateRect 3s ease-in-out 0s infinite alternate;
+      }
+
+      .rect-box::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 0 0px 4px lightsalmon;
+        background: #37474f;
+        animation: rotateRectA 3s ease-in-out 0s infinite alternate;
+      }
+
+      @keyframes rotateRect {
+        0% {
+          transform: rotateZ(0deg);
+        }
+
+        20% {
+          transform: rotateZ(-90deg);
+        }
+
+        25% {
+          transform: rotateZ(-90deg);
+        }
+
+        45% {
+          transform: rotateZ(-180deg);
+        }
+
+        50% {
+          transform: rotateZ(-180deg);
+        }
+
+        70% {
+          transform: rotateZ(-270deg);
+        }
+
+        75% {
+          transform: rotateZ(-270deg);
+        }
+
+        100% {
+          transform: rotateZ(-360deg);
+        }
+      }
+
+      @keyframes rotateRectA {
+        0% {
+          transform: rotateZ(45deg);
+        }
+
+        20% {
+          transform: rotateZ(225deg);
+        }
+
+        25% {
+          transform: rotateZ(225deg);
+        }
+
+        45% {
+          transform: rotateZ(405deg);
+        }
+
+        50% {
+          transform: rotateZ(405deg);
+        }
+
+        70% {
+          transform: rotateZ(585deg);
+        }
+
+        75% {
+          transform: rotateZ(585deg);
+        }
+
+        100% {
+          transform: rotateZ(765deg);
+        }
+      }
+    </style>
+
+    <!-- 爱心loading -->
+    <style>
+      .loading {
+        width: 270px;
+        height: 200px;
+        /* margin: 0 0 0 150px; */
+        /* border: 1px solid black; */
+        position: relative;
+        top: 50%;
+        margin-top: -10px;
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+
+      .loading ul {
+        list-style: none;
+      }
+
+      .loading ul::after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+
+      .loading ul li {
+        float: left;
+        width: 20px;
+        height: 20px;
+        border-radius: 20px;
+        background-color: blueviolet;
+        margin-right: 10px;
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+
+      .loading ul li:nth-child(1) {
+        background-color: #f62e74;
+        animation: love1 4s ease 0s infinite;
+      }
+
+      .loading ul li:nth-child(2) {
+        background-color: #f45330;
+        animation: love2 4s ease 0.15s infinite;
+      }
+
+      .loading ul li:nth-child(3) {
+        background-color: #ffc883;
+        animation: love3 4s ease 0.3s infinite;
+      }
+
+      .loading ul li:nth-child(4) {
+        background-color: #30d268;
+        animation: love4 4s ease 0.45s infinite;
+      }
+
+      .loading ul li:nth-child(5) {
+        background-color: #006cb4;
+        animation: love5 4s ease 0.6s infinite;
+      }
+
+      .loading ul li:nth-child(6) {
+        background-color: #784697;
+        animation: love4 4s ease 0.75s infinite;
+      }
+
+      .loading ul li:nth-child(7) {
+        background-color: #ffc883;
+        animation: love3 4s ease 0.9s infinite;
+      }
+
+      .loading ul li:nth-child(8) {
+        background-color: #f45330;
+        animation: love2 4s ease 1.05s infinite;
+      }
+
+      .loading ul li:nth-child(9) {
+        background-color: #f62e74;
+        animation: love1 4s ease 1.2s infinite;
+      }
+
+      @keyframes love1 {
+        0% {
+          height: 20px;
+          top: 0;
+        }
+
+        30% {
+          height: 60px;
+          top: -30px;
+        }
+
+        100% {
+          height: 20px;
+          top: 0;
+        }
+      }
+
+      @keyframes love2 {
+        0% {
+          height: 20px;
+          top: 0;
+        }
+
+        30% {
+          height: 125px;
+          top: -60px;
+        }
+
+        100% {
+          height: 20px;
+          top: 0;
+        }
+      }
+
+      @keyframes love3 {
+        0% {
+          height: 20px;
+          top: 0;
+        }
+
+        30% {
+          height: 160px;
+          top: -80px;
+        }
+
+        100% {
+          height: 20px;
+          top: 0;
+        }
+      }
+
+      @keyframes love4 {
+        0% {
+          height: 20px;
+          top: 0;
+        }
+
+        30% {
+          height: 180px;
+          top: -60px;
+        }
+
+        100% {
+          height: 20px;
+          top: 0;
+        }
+      }
+
+      @keyframes love5 {
+        0% {
+          height: 20px;
+          top: 0;
+        }
+
+        30% {
+          height: 190px;
+          top: -50px;
+        }
+
+        100% {
+          height: 20px;
+          top: 0;
+        }
+      }
+    </style>
+    <!-- 文字loading -->
+    <style>
+      :root {
+        --tf: linear;
+        --effect: loadText 1s var(--tf) infinite;
+      }
+      .loadText {
+        position: relative;
+        top: 50%;
+        transform: translate(0,-50%);
+      }
+      .loadText p {
+        display: inline-block;
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 32px;
+        font-family: arial;
+        font-weight: 600;
+        transform: scale(0.5);
+        color: #121212;
+        -webkit-text-stroke: 1px gray;
+      }
+
+      .loadText p:nth-child(1) {
+        animation: var(--effect);
+      }
+
+      .loadText p:nth-child(2) {
+        animation: var(--effect) 0.125s;
+      }
+
+      .loadText p:nth-child(3) {
+        animation: var(--effect) 0.25s;
+      }
+
+      .loadText p:nth-child(4) {
+        animation: var(--effect) 0.375s;
+      }
+
+      .loadText p:nth-child(5) {
+        animation: var(--effect) 0.5s;
+      }
+
+      .loadText p:nth-child(6) {
+        animation: var(--effect) 0.675s;
+      }
+
+      .loadText p:nth-child(7) {
+        animation: var(--effect) 0.75s;
+      }
+      @keyframes loadText {
+        0% {
+          transform: scale(0.5);
+          color: #121212;
+          -webkit-text-stroke: 2px black;
+        }
+        20% {
+          transform: scale(1);
+          color: pink;
+          -webkit-text-stroke: 3px white;
+          filter: drop-shadow(0 0 1px black) drop-shadow(0 0 1px black)
+            drop-shadow(0 0 3px black) drop-shadow(0 0 5px gray) hue-rotate(10turn);
+        }
+
+        50% {
+          transform: scale(0.5);
+          color: #121212;
+          -webkit-text-stroke: 2px gray;
+        }
+      }
+    </style>
+    <!-- 齿轮loading -->
+    <style>
+      .loading2 {
+        width: 200px;
+        height: 200px;
+        padding: 24px;
+        /* margin: 100px; */
+        position: relative;
+        text-align: center;
+        overflow: hidden;
+        border-radius: 15px;
+      }
+
+      .loading2 div {
+        display: block;
+      }
+
+      .loading2 .gear {
+        position: relative;
+      }
+      .loading2 .gear .piece {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 10%;
+      }
+
+      .loading2 .gear .piece:nth-child(1) {
+        transform: rotate(0deg);
+      }
+
+      .loading2 .gear .piece:nth-child(2) {
+        transform: rotate(30deg);
+      }
+
+      .loading2 .gear .piece:nth-child(3) {
+        transform: rotate(60deg);
+      }
+
+      .loading2 .gear .hole {
+        width: 100%;
+        height: 100%;
+        background: white;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        transform: scale(0.5);
+      }
+
+      @keyframes gearRotate {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .loading2 .gear-top {
+        width: 100px;
+        height: 100px;
+        animation: gearRotate 7s linear 0s infinite;
+        left: 50px;
+      }
+      .loading2 p {
+        position: absolute;
+        bottom: 0;
+        transform: translate(-50%);
+        left: 50%;
+        color: white;
+      }
+      .loading2 .gear-top .piece {
+        background: lightsalmon;
+      }
+
+      .loading2 .gear-left {
+        width: 50px;
+        height: 50px;
+        animation: gearRotate 7s linear 0s infinite reverse;
+        top: 4px;
+        left: 16px;
+      }
+
+      .loading2 .gear-left .piece {
+        background: rgb(0, 0, 0);
+      }
+
+      .loading2 .gear-right {
+        width: 70px;
+        height: 70px;
+        animation: gearRotate 7s linear 0s infinite reverse;
+        top: -48px;
+        left: 132px;
+      }
+
+      .loading2 .gear-right .piece {
+        background: lightseagreen;
+      }
+
+      .loading2 .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* background: rgba(0, 0, 0, 0.9); */
+        border-radius: 50%;
+        transform: scale(0.5);
+        box-shadow: 0 0 0 10000px rgba(255, 255, 255, 0.1),
+          0 0 10px 0 rgba(0, 0, 0, 0.2) inset;
+      }
+
+      .loading2 p {
+        margin: 0;
+      }
+    </style>
+
+    <!-- circle渐变loading -->
+    <style>
+      .circle-loading {
+        width: 150px;
+        height: 150px;
+        position: relative;
+        top: 50%;
+        margin-top: -75px;
+        /* border: 1px solid black; */
+        background: linear-gradient(
+          0deg,
+          rgba(63, 249, 220, 0.1) 33%,
+          rgba(63, 249, 220, 1) 100%
+        );
+        padding: 2px;
+        border-radius: 50%;
+        animation: circleRotate 1s linear 0s infinite;
+      }
+
+      .circle-loading .circle-core {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: #37474f;
+      }
+
+      @keyframes circleRotate {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+    <!-- 发光线条旋转loading -->
+    <style>
+      .loader {
+        width: 150px;
+        height: 150px;
+        /* border: 1px solid black; */
+        position: relative;
+        top: 50%;
+        margin-top: -75px;
+      }
+
+      .loader-core1 {
+        width: 90%;
+        height: 90%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        border-radius: 50%;
+        border-style: solid;
+        border-width: 2px 2px 0 0;
+        border-color: gold transparent transparent gold;
+        animation: loader1 2s linear 0s infinite;
+      }
+
+      .loader-core1::after {
+        content: "";
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: gold;
+        position: absolute;
+        top: 18px;
+        right: 13px;
+        box-shadow: 0 2px 13px 2px rgba(255, 215, 0, 1);
+      }
+
+      .loader-core2 {
+        width: 70%;
+        height: 70%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        border-radius: 50%;
+        border-style: solid;
+        border-width: 0 2px 2px 0px;
+        border-color: transparent transparent lime lime;
+        animation: loader1 2s linear 0s infinite reverse;
+      }
+
+      .loader-core2::after {
+        content: "";
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: lime;
+        position: absolute;
+        bottom: 12px;
+        right: 10px;
+        box-shadow: 0 2px 13px 2px rgba(0, 255, 0, 1);
+      }
+
+      @keyframes loader1 {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+    <!-- 缩放旋转变形loading -->
+    <style>
+      .loader2 {
+        width: 150px;
+        height: 150px;
+        position: relative;
+        text-align: center;
+        top: 50%;
+        margin-top: -75px;
+      }
+
+      .loader2 span {
+        position: absolute;
+      }
+
+      .loader2 .loader2-core {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: #db2f00;
+        animation: scaleLoader 3s ease 0s infinite;
+      }
+
+      .loader2::after {
+        content: "";
+        display: block;
+        height: 5px;
+        width: 100%;
+        position: absolute;
+        bottom: -50px;
+        background-color: rgba(0, 0, 0, 0.4);
+        border-radius: 50%;
+        animation: scaleLoader2 3s ease 0s infinite;
+      }
+
+      .loader2 .loader2-text {
+        width: 100%;
+        height: 150px;
+        display: block;
+        z-index: 2;
+        line-height: 150px;
+        color: #fff;
+        font-size: 24px;
+        animation: scaleLoader2 3s ease 0s infinite;
+      }
+
+      @keyframes scaleLoader {
+        0% {
+          transform: rotate(0deg) scale(1);
+          border-radius: 0;
+          background-color: #db2f00;
+        }
+
+        30% {
+          transform: rotate(360deg) scale(0.5);
+          border-radius: 50%;
+          background-color: #13a3a5;
+        }
+
+        50% {
+          transform: rotate(360deg) scale(0.5);
+          border-radius: 50%;
+          background-color: #13a3a5;
+        }
+
+        80% {
+          transform: rotate(720deg) scale(1);
+          border-radius: 0;
+          background-color: #db2f00;
+        }
+
+        100% {
+          transform: rotate(720deg) scale(1);
+          border-radius: 0;
+          background-color: #db2f00;
+        }
+      }
+
+      @keyframes scaleLoader2 {
+        0% {
+          transform: scale(1);
+        }
+
+        30% {
+          transform: scale(0.5);
+        }
+
+        50% {
+          transform: scale(0.5);
+        }
+
+        80% {
+          transform: scale(1);
+        }
+
+        100% {
+          transform: scale(1);
+        }
+      }
+    </style>
+
+    <!-- 弹动精灵球loading -->
+    <style>
+      .ball-loading {
+        position: relative;
+        width: 150px;
+        height: 150px;
+      }
+
+      .ball-loading .ball {
+        height: 100%;
+        width: 100%;
+        position: relative;
+        border-radius: 50%;
+        bottom: 30px;
+        animation: ballJump 1s linear 0s infinite;
+      }
+
+      .ball-loading .ball .ball-top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 50%;
+        width: 100%;
+        background-color: #ee1515;
+      }
+
+      .ball-loading .ball .ball-top::after {
+        content: "";
+        display: block;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 60%;
+        left: 60%;
+        background-image: radial-gradient(
+          rgba(255, 255, 255, 0.5) 0%,
+          rgba(255, 255, 255, 0.25) 29%,
+          rgba(255, 255, 255, 0) 70%
+        );
+      }
+
+      .ball-loading .ball .ball-middle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -40%);
+        height: 20px;
+        width: 20px;
+        border: 5px solid black;
+        border-radius: 50%;
+        background-color: #fff;
+        z-index: 2;
+      }
+
+      .ball-loading .ball .ball-bottom {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        height: 50%;
+        width: 100%;
+        border-width: 8px 0 0 0;
+        border-style: solid;
+        border-color: black;
+        background-color: #fff;
+      }
+
+      .ball-loading .ball .ball-bottom:after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        /* background-color: blue; */
+
+        animation: ballShade 1s linear 0s infinite;
+      }
+
+      .ball-loading .ball-shadow {
+        position: absolute;
+        bottom: -24px;
+        left: 0;
+        height: 20px;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        border-radius: 50%;
+        z-index: -1;
+        animation: ballShadow 1s linear 0s infinite;
+      }
+
+      @keyframes ballJump {
+        0% {
+          bottom: 30px;
+          clip-path: ellipse(27% 37% at 50% 50%);
+        }
+
+        50% {
+          bottom: -50px;
+        }
+
+        70% {
+          bottom: -50px;
+          clip-path: ellipse(36% 23% at 50% 50%);
+        }
+
+        100% {
+          bottom: 30px;
+          clip-path: ellipse(27% 37% at 50% 50%);
+        }
+      }
+
+      @keyframes ballShade {
+        0% {
+          background-image: linear-gradient(
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.1) 100%
+          );
+        }
+
+        20% {
+          background-image: linear-gradient(
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.2) 100%
+          );
+        }
+
+        30% {
+          background-image: linear-gradient(
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.4) 100%
+          );
+        }
+
+        40% {
+          background-image: linear-gradient(
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.6) 100%
+          );
+        }
+
+        50% {
+          background-image: linear-gradient(
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.8) 100%
+          );
+        }
+
+        60% {
+          background-image: linear-gradient(
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.8) 100%
+          );
+        }
+
+        70% {
+          background-image: linear-gradient(
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.6) 100%
+          );
+        }
+
+        80% {
+          background-image: linear-gradient(
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.4) 100%
+          );
+        }
+
+        90% {
+          background-image: linear-gradient(
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.2) 100%
+          );
+        }
+
+        100% {
+          background-image: linear-gradient(
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.1) 100%
+          );
+        }
+      }
+
+      @keyframes ballShadow {
+        0% {
+          clip-path: ellipse(13% 20% at 50% 50%);
+          background-color: rgba(0, 0, 0, 0.15);
+        }
+
+        50% {
+        }
+
+        70% {
+          clip-path: ellipse(27% 37% at 50% 50%);
+          background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        100% {
+          clip-path: ellipse(13% 20% at 50% 50%);
+          background-color: rgba(0, 0, 0, 0.15);
+        }
+      }
+    </style>
+    <!-- <div class="ball-loading">
+      <div class="ball">
+        <div class="ball-top"></div>
+        <div class="ball-middle"></div>
+        <div class="ball-bottom"></div>
+      </div>
+      <div class="ball-shadow"></div>
+    </div> -->
+
+    <!-- 螺旋loading -->
+    <style>
+      .shaft-load11 {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        top: 50%;
+        transform: translate(0,-50%);
+      }
+      .shaft-load11 > div {
+        background: transparent;
+        border: 8px solid transparent;
+        border-color: rgba(255, 0, 0, 0.705) transparent;
+        -webkit-border-radius: 100%;
+        -moz-border-radius: 100%;
+        border-radius: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate "("-50%, -50% ")";
+        -moz-transform: translate "("-50%, -50% ")";
+        -ms-transform: translate "("-50%, -50% ")";
+        -o-transform: translate "("-50%, -50% ")";
+        transform: translate "("-50%, -50% ")";
+        -webkit-transform: translate(-50%, -50%) rotate(0);
+        -moz-transform: translate(-50%, -50%) rotate(0);
+        -ms-transform: translate(-50%, -50%) rotate(0);
+        -o-transform: translate(-50%, -50%) rotate(0);
+        transform: translate(-50%, -50%) rotate(0);
+        -webkit-animation: loading11 2s infinite ease-in-out;
+        -moz-animation: loading11 2s infinite ease-in-out;
+        -o-animation: loading11 2s infinite ease-in-out;
+        animation: loading11 2s infinite ease-in-out;
+      }
+      .shaft-load11 .shaft1 {
+        -webkit-animation-delay: 0.1s;
+        -moz-animation-delay: 0.1s;
+        -o-animation-delay: 0.1s;
+        animation-delay: 0.1s;
+        width: 20px;
+        height: 20px;
+      }
+      .shaft-load11 .shaft2 {
+        -webkit-animation-delay: 0.2s;
+        -moz-animation-delay: 0.2s;
+        -o-animation-delay: 0.2s;
+        animation-delay: 0.2s;
+        width: 25px;
+        height: 25px;
+      }
+      .shaft-load11 .shaft3 {
+        -webkit-animation-delay: 0.3s;
+        -moz-animation-delay: 0.3s;
+        -o-animation-delay: 0.3s;
+        animation-delay: 0.3s;
+        width: 35px;
+        height: 35px;
+      }
+      .shaft-load11 .shaft4 {
+        -webkit-animation-delay: 0.4s;
+        -moz-animation-delay: 0.4s;
+        -o-animation-delay: 0.4s;
+        animation-delay: 0.4s;
+        width: 45px;
+        height: 45px;
+      }
+      .shaft-load11 .shaft5 {
+        -webkit-animation-delay: 0.5s;
+        -moz-animation-delay: 0.5s;
+        -o-animation-delay: 0.5s;
+        animation-delay: 0.5s;
+        width: 55px;
+        height: 55px;
+      }
+      .shaft-load11 .shaft6 {
+        -webkit-animation-delay: 0.6s;
+        -moz-animation-delay: 0.6s;
+        -o-animation-delay: 0.6s;
+        animation-delay: 0.6s;
+        width: 65px;
+        height: 65px;
+      }
+      .shaft-load11 .shaft7 {
+        -webkit-animation-delay: 0.7s;
+        -moz-animation-delay: 0.7s;
+        -o-animation-delay: 0.7s;
+        animation-delay: 0.7s;
+        width: 75px;
+        height: 75px;
+      }
+      .shaft-load11 .shaft8 {
+        -webkit-animation-delay: 0.8s;
+        -moz-animation-delay: 0.8s;
+        -o-animation-delay: 0.8s;
+        animation-delay: 0.8s;
+        width: 80px;
+        height: 80px;
+      }
+      .shaft-load11 .shaft9 {
+        -webkit-animation-delay: 0.9s;
+        -moz-animation-delay: 0.9s;
+        -o-animation-delay: 0.9s;
+        animation-delay: 0.9s;
+        width: 85px;
+        height: 85px;
+      }
+      .shaft-load11 .shaft10 {
+        -webkit-animation-delay: 1s;
+        -moz-animation-delay: 1s;
+        -o-animation-delay: 1s;
+        animation-delay: 1s;
+        width: 90px;
+        height: 90px;
+      }
+
+      @-webkit-keyframes loading11 {
+        50% {
+          -webkit-transform: translate(-50%, -50%) rotate(360deg);
+          -moz-transform: translate(-50%, -50%) rotate(360deg);
+          -ms-transform: translate(-50%, -50%) rotate(360deg);
+          -o-transform: translate(-50%, -50%) rotate(360deg);
+          transform: translate(-50%, -50%) rotate(360deg);
+          border-color: rgba(0,0,0,.1) transparent;
+        }
+      }
+      @-moz-keyframes loading11 {
+        50% {
+          -webkit-transform: translate(-50%, -50%) rotate(360deg);
+          -moz-transform: translate(-50%, -50%) rotate(360deg);
+          -ms-transform: translate(-50%, -50%) rotate(360deg);
+          -o-transform: translate(-50%, -50%) rotate(360deg);
+          transform: translate(-50%, -50%) rotate(360deg);
+          border-color: rgba(0,0,0,.1) transparent;
+        }
+      }
+      @-o-keyframes loading11 {
+        50% {
+          -webkit-transform: translate(-50%, -50%) rotate(360deg);
+          -moz-transform: translate(-50%, -50%) rotate(360deg);
+          -ms-transform: translate(-50%, -50%) rotate(360deg);
+          -o-transform: translate(-50%, -50%) rotate(360deg);
+          transform: translate(-50%, -50%) rotate(360deg);
+          border-color: rgba(0,0,0,.1) transparent;
+        }
+      }
+      @keyframes loading11 {
+        50% {
+          -webkit-transform: translate(-50%, -50%) rotate(360deg);
+          -moz-transform: translate(-50%, -50%) rotate(360deg);
+          -ms-transform: translate(-50%, -50%) rotate(360deg);
+          -o-transform: translate(-50%, -50%) rotate(360deg);
+          transform: translate(-50%, -50%) rotate(360deg);
+          border-color: rgba(0,0,0,.1) transparent;
+        }
+      }
+    </style>
+
+    
+  </body>
+</html>

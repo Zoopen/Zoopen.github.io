@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>无限轮播图</title>
+    <link href="https://cdn.bootcss.com/minireset.css/0.0.2/minireset.min.css" rel="stylesheet">
+    <style>
+        .slider {
+            width: 300px;
+            height: 195px;
+            overflow: hidden;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .slider-content {
+            background: red;
+            overflow: hidden;
+            width: 300%;
+            height: 100%;
+            /* height: 195px; */
+            margin-left: -100%;
+            position: relative;
+        }
+
+        .slider-content li {
+            float: left;
+            position: absolute;
+            left: 600px;
+        }
+
+        .slider-content li:first-child {
+            left: 300px;
+        }
+
+        .slider-content li img {
+            vertical-align: middle;
+            width: 300px;
+        }
+
+        .paganition {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 3;
+        }
+
+        .paganition span {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background: crimson;
+            margin-left: 5px;
+        }
+
+        .paganition span.active {
+            background: chartreuse;
+        }
+
+        .control {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            line-height: 30px;
+            margin-top: -15px;
+            z-index: 3;
+            color: white;
+        }
+
+        .control span:last-child {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider">
+        <ul class="slider-content">
+            <li><img src="./img/a1.png" alt=""></li>
+            <li><img src="./img/a2.png" alt=""></li>
+            <li><img src="./img/a3.png" alt=""></li>
+            <li><img src="./img/a4.png" alt=""></li>
+        </ul>
+        <div class="control">
+            <span class="prev">上一页</span>
+            <span class="next">下一页</span>
+        </div>
+        <div class="paganition"></div>
+    </div>
+    <script src="https://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script>
+    <script>
+        var current = 0
+        var clickAble = true
+        // 下一页点击事件
+        $(".control .next").click(nextPic)
+        //下一页的方法
+        function nextPic() {
+            if (!clickAble) return
+            clickAble = false
+            afterView()
+            current = current >= imgLength - 1 ? 0 : ++current
+            showPic()
+            dotActive()
+        }
+        // 上一页点击事件
+        $(".control .prev").click(prevPic)
+        //上一页的方法
+        function prevPic() {
+            if (!clickAble) return
+            clickAble = false
+            beforeView()
+            current = current <= 0 ? imgLength - 1 : --current
+            showPic()
+            dotActive()
+        }
+        //让图片到前面去
+        function beforeView() {
+            $(".slider-content li").eq(current - 1).css({
+                "left": "0px",
+                "z-index": 2
+            })
+        }
+        //让图片到后面去
+        function afterView() {
+            $(".slider-content li").eq(current - 1).css({
+                "left": "600px",
+                "z-index": 2
+            })
+        }
+        //切换图片的方法
+        function showPic() {
+            $(".slider-content li").eq(current).animate({
+                "left": "300px",
+                "z-index": 1
+            }, function () {
+                $(".slider-content li").eq(current).siblings().css({
+                    "left": "600px",
+                    "z-index": 2
+                })
+                clickAble = true
+            })
+        }
+        var imgLength = 0
+        $(".slider-content li").each(function () {
+            imgLength++
+            //小点点点击事件
+            $("<span></span>").appendTo(".paganition").click(function () {
+                if (!clickAble) return
+                clickAble = false
+                // console.log(current);
+
+                if ($(this).index() > current) {
+                    afterView()
+                } else {
+                    $(".slider-content li").eq($(this).index()).css({
+                        "left": "0px",
+                        "z-index": 2
+                    })
+                }
+                current = $(this).index()
+                showPic()
+                dotActive()
+            })
+        })
+
+        function dotActive() {
+            $(".paganition span").eq(current).addClass("active").siblings().removeClass("active")
+        }
+        $(".paganition span").eq(current).addClass("active")
+        var id = setInterval(nextPic, 3000)
+        $(".slider").mouseenter(function () {clearInterval(id)})
+        $(".slider").mouseleave(function () {id = setInterval(nextPic, 3000)})
+    </script>
+</body>
+
+</html>
