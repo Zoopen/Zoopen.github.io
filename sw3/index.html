@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>全屏滚动</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.staticfile.org/minireset.css/0.0.2/minireset.css"
+    />
+    <link rel="stylesheet" href="./css/swiper.min.css" />
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/swiper.min.js"></script>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="header-content">
+        <div class="header-left">
+          <div class="logo">Zoopen</div>
+        </div>
+        <div class="header-right">
+          <div class="nav">
+            <ul class="nav-content">
+              <li>
+                首页
+                <div class="circle"></div>
+              </li>
+              <li>
+                轻松入门
+                <div class="circle"></div>
+              </li>
+              <li>
+                快乐交友
+                <div class="circle"></div>
+              </li>
+              <li>
+                萌宠养成
+                <div class="circle"></div>
+              </li>
+              <li>
+                丰富活动
+                <div class="circle"></div>
+              </li>
+              <li>
+                有爱玩家
+                <div class="circle"></div>
+              </li>
+            </ul>
+            <div class="hoverBg">
+              <div class="triangle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="wrap">
+      <section id="page1">
+        <div class="logo">
+          <img src="./images/sw3_logo.png" alt="" />
+        </div>
+        <div class="content">
+          <div class="title">
+            <img src="./images/tit.png" alt="" />
+          </div>
+          <div class="step">
+            <a><span>轻松入门</span></a>
+            <a><span>快乐交友</span></a>
+            <a><span>萌宠养成</span></a>
+            <a><span>丰富活动</span></a>
+            <a><span>有爱玩家</span></a>
+          </div>
+        </div>
+      </section>
+      <section id="page2">
+        <div class="swb">
+          <div class="content">
+            <h2>轻松入门 绿色公平</h2>
+            <div class="flower">荷花分界线</div>
+            <h3>独创神武币系统 平民玩家也可成大神</h3>
+            <p class="dec">
+              创新神武币交易，颠覆传统模式。普通玩家通过自己的努力换取到神武币，可交易获得游戏中各种核心道具，实现自给自足，并可通过市场自身调控物价水平，促使交易更公平合理。人人平等，多劳多得，平民玩家也能成高手，真正免费痛快！
+            </p>
+            <div class="pic"><img src="./images/img_swb.png" alt="" /></div>
+          </div>
+        </div>
+      </section>
+      <section id="page3">
+        <div class="menpai-area">
+          <div class="content">
+            <h2>结交好友 邂逅爱情</h2>
+            <div class="flower">荷花分界线</div>
+            <div class="menpai-list">
+              <div class="menpai">
+                <h3>快乐交友结情谊 逗比犯二一起来</h3>
+                <p class="dec">
+                  兄弟结拜携手闯荡江湖，建立山庄与好友共谋大业。还有搞怪中的组队大变身，欢笑中的集体犯二，谁的青春没跟朋友干过几件逗比事儿。
+                </p>
+                <div class="slider">
+                  <div class="swiper-container" id="one">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                        <img src="./images/qwsj_1s.jpg" alt="" />
+                      </div>
+                      <div class="swiper-slide">
+                        <img src="./images/qwsj_2s.jpg" alt="" />
+                      </div>
+                      <div class="swiper-slide">
+                        <img src="./images/qwsj_3s.jpg" alt="" />
+                      </div>
+                      <div class="swiper-slide">
+                        <img src="./images/qwsj_4s.jpg" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 如果需要导航按钮 -->
+                  <div class="swiper-button-prev"></div>
+                  <div class="swiper-button-next"></div>
+                </div>
+              </div>
+              <div class="menpai on">
+                <h3>有爱帮派大家庭 形影不离好伙伴</h3>
+                <p class="dec">
+                  热闹有爱的帮派大家庭，形影不离的日常固定队，精彩纷呈的帮派活动，同仇敌忾的帮战，让你的神武人生永远有朋友们的守护。
+                </p>
+                <div class="slider">
+                  <div class="swiper-container" id="two">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                        <img src="./images/xfbp_1s.jpg" alt="" />
+                      </div>
+                      <div class="swiper-slide">
+                        <img src="./images/xfbp_2s.jpg" alt="" />
+                      </div>
+                      <div class="swiper-slide">
+                        <img src="./images/xfbp_3s.jpg" alt="" />
+                      </div>
+                      <div class="swiper-slide">
+                        <img src="./images/xfbp_4s.jpg" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 如果需要导航按钮 -->
+                  <div class="swiper-button-prev"></div>
+                  <div class="swiper-button-next"></div>
+                </div>
+              </div>
+
+              <div class="menpai">
+                <h3>三世姻缘一线牵 养儿育女筑爱巢</h3>
+                <p class="dec">
+                  与相爱的人一起装饰新房，摆放家具，打理庭院；诞下爱情的结晶，教他学文习武，成为你的小助手，当然——双人坐骑、情侣头像、夫妻称谓……这里有一百种方式让你秀恩爱。
+                </p>
+                <div class="slider">
+                  <div class="swiper-container" id="three">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                        <img src="./images/lahy_1s.jpg" alt="" />
+                      </div>
+                      <div class="swiper-slide">
+                        <img src="./images/lahy_2s.jpg" alt="" />
+                      </div>
+                      <div class="swiper-slide">
+                        <img src="./images/lahy_3s.jpg" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 如果需要导航按钮 -->
+                  <div class="swiper-button-prev"></div>
+                  <div class="swiper-button-next"></div>
+                </div>
+              </div>
+            </div>
+            <div class="slide-tab">
+              <div class="item prev">
+                <div class="pic">
+                  <img src="./images/roll_02.png" alt="" />
+                </div>
+                <i></i>
+                <span>趣味社交</span>
+              </div>
+              <div class="item current">
+                <div class="pic">
+                  <img src="./images/roll_03.png" alt="" />
+                </div>
+                <i></i>
+                <span>幸福帮派</span>
+              </div>
+              <div class="item next">
+                <div class="pic">
+                  <img src="./images/roll_01.png" alt="" />
+                </div>
+                <i></i>
+                <span>恋爱婚姻</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="page4">
+        <div class="pet">
+          <div class="content">
+            <h2>可爱萌宠 妙趣养成</h2>
+            <div class="flower">荷花分界线</div>
+            <p class="dec">
+              《神武3》宠物，从你出现在神武世界的第一刻起，就一直不离不弃的伴随你的左右。在成长的不同阶段，《神武3》都会有不同类型的萌宠给你选择，有趣的养成玩法让你在游戏中体验更多的乐趣！
+            </p>
+            <dl>
+              <dt>萌 变 酷 强</dt>
+              <dd>超百种萌宠，可爱呆萌、帅气潇洒，总有一款你钟爱</dd>
+              <dd>个性染色，专属饰物，让你的萌宠与众不同</dd>
+              <dd>多种酷炫技能，不同技能搭配，助力酣畅战斗</dd>
+              <dd>洗宠、炼化、炼妖等多种养成渠道，打造强力助手</dd>
+            </dl>
+            <div class="pet-list">
+              <ul>
+                <!-- <li>
+                  <div class="pic">
+                    <img src="./images/ssxlr.gif" alt="" />
+                  </div>
+                  <span>神兽小龙人</span>
+                </li>
+                <li>
+                  <div class="pic">
+                    <img src="./images/zsdpx.gif" alt="" />
+                  </div>
+                  <span>珍兽大胖熊</span>
+                </li>
+                <li>
+                  <div class="pic">
+                    <img src="./images/zsxfy.gif" alt="" />
+                  </div>
+                  <span>珍兽小肥羊</span>
+                </li> -->
+              </ul>
+              <a class="btn-change">
+                <span>
+                  <em>换一组</em>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="page5">
+        <div class="pk">
+          <div class="content">
+            <h2>精彩玩法 PK竞技 休闲趣味</h2>
+            <div class="flower">荷花分界线</div>
+            <div class="pk-content">
+              <div class="pk-list">
+                <ul>
+                  <li class="on">
+                    <!-- 背景 -->
+                    <div class="role-bg">
+                      <img src="./images/bg_role1.png" alt="" />
+                    </div>
+                    <!-- 角色 -->
+                    <div class="role role1">
+                      <img src="./images/role1.png" alt="" />
+                    </div>
+                    <!-- 详情 -->
+                    <div class="role-box role-box1">
+                      <h3>精彩玩法 <span>快乐停不下来</span><i></i></h3>
+                      <div class="pk-img">
+                        <a href="./images/1_3.jpg" title="二十八星宿">
+                          <img src="./images/1_3s.jpg" alt="" />
+                        </a>
+                        <a href="./images/1_1.jpg" title="三十六天罡">
+                          <img src="./images/1_1s.jpg" alt="" />
+                        </a>
+                        <a href="./images/1_2.jpg" title="十二生肖">
+                          <img src="./images/1_2s.jpg" alt="" />
+                        </a>
+                        <a href="./images/1_4.jpg" title="镇魔卫道">
+                          <img src="./images/1_4s.jpg" alt="" />
+                        </a>
+                      </div>
+                      <div class="info">
+                        <p>
+                          生肖星宿，镇魔封妖，三十六天罡……多达百余种不同类型的游戏玩法，让你自由选择。无论是PvP还是PvE，不同的追求都会得到同样的快乐！
+                        </p>
+                      </div>
+                      <div class="pk-btn pk-btn1">
+                        <a href="javascript:;">十二生肖</a>
+                        <a href="javascript:;">二十八星宿</a>
+                        <a href="javascript:;">三十六天罡</a>
+                        <a href="javascript:;">镇魔卫道</a>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="role-bg">
+                      <img src="./images/bg_role2.png" alt="" />
+                    </div>
+                    <div class="role role2">
+                      <img src="./images/role2.png" alt="" />
+                    </div>
+                    <div class="role-box role-box2">
+                      <h3>回合竞技 <span>战斗瞬息万变</span><i></i></h3>
+                      <div class="pk-img">
+                        <a href="./images/2_1.jpg" title="烽火连城">
+                          <img src="./images/2_1s.jpg" alt="" />
+                        </a>
+                        <a href="./images/2_2.jpg" title="群雄逐鹿">
+                          <img src="./images/2_2s.jpg" alt="" />
+                        </a>
+                        <a href="./images/2_3.jpg" title="人物排位赛">
+                          <img src="./images/2_3s.jpg" alt="" />
+                        </a>
+                        <a href="./images/2_4.jpg" title="生存大挑战">
+                          <img src="./images/2_4s.jpg" alt="" />
+                        </a>
+                      </div>
+                      <div class="info">
+                        <p>
+                          点杀！守尸！卡速喂药！先防御下回合放特技！……当你找到自己的队伍，与他们并肩作战的时候，你便会感受到，每一次击杀都欢欣鼓舞，每一个回合都牵动人心。
+                        </p>
+                      </div>
+                      <div class="pk-btn pk-btn2">
+                        <a href="javascript:;">烽火连城</a>
+                        <a href="javascript:;">群雄逐鹿</a>
+                        <a href="javascript:;">人物排位赛</a>
+                        <a href="javascript:;">生存大挑战</a>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="role-bg">
+                      <img src="./images/bg_role3.png" alt="" />
+                    </div>
+                    <div class="role role3">
+                      <img src="./images/role3.png" alt="" />
+                    </div>
+                    <div class="role-box role-box3">
+                      <h3>休闲养成 <span>享受日常点滴</span><i></i></h3>
+                      <div class="pk-img">
+                        <a href="./images/3_1.jpg" title="钓鱼">
+                          <img src="./images/3_1s.jpg" alt="" />
+                        </a>
+                        <a href="./images/3_2.jpg" title="经商对战">
+                          <img src="./images/3_2s.jpg" alt="" />
+                        </a>
+                        <a href="./images/3_3.jpg" title="天降宝箱">
+                          <img src="./images/3_3s.jpg" alt="" />
+                        </a>
+                        <a href="./images/3_4.jpg" title="宴会">
+                          <img src="./images/3_4s.jpg" alt="" />
+                        </a>
+                      </div>
+                      <div class="info">
+                        <p>
+                          这里还有着丰富多样的休闲活动，你可以选择化身赚得盆满钵满富甲一方的商人，也可垂钓江上把弄古玩享受日常点滴，或是参加友人宴会品尝山珍海味，在神武世界享受无穷的乐趣。
+                        </p>
+                      </div>
+                      <div class="pk-btn pk-btn3">
+                        <a href="javascript:;">钓鱼</a>
+                        <a href="javascript:;">经商对战</a>
+                        <a href="javascript:;">天降宝箱</a>
+                        <a href="javascript:;">宴会</a>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="page6">
+        <div class="home">
+          <div class="content">
+            <h2>温馨玩家圈 有梦有爱</h2>
+            <div class="flower">荷花分界线</div>
+            <div class="home-content">
+              <div class="home-slider">
+                <div class="swiper-container" id="home">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <img src="./images/1.jpg" alt="" />
+                      <div class="txt">
+                        <p>
+                          没有复杂的人际关系 更加纯真的喜怒哀乐
+                          可以给予我们温暖的港湾
+                        </p>
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./images/2.jpg" alt="" />
+                      <div class="txt">
+                        <p>
+                          既有在地面奔跑着的踏雪龙马 也有于天空翱翔的展翅雄鹰
+                          还有承载温馨浪漫的双人坐骑
+                        </p>
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./images/3.jpg" alt="" />
+                      <div class="txt">
+                        <p>
+                          浪漫甜蜜的婚姻 可爱的淘气的子女
+                          在红娘面前对你许下山盟海誓 与你看遍三界最美的风景
+                        </p>
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./images/4.jpg" alt="" />
+                      <div class="txt">
+                        <p>
+                          变身穷凶极恶的霜狼 或是呆萌可爱的吉祥
+                          装扮自己的美好家园 种菜逗宠乐此不疲
+                        </p>
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./images/5.jpg" alt="" />
+                      <div class="txt">
+                        <p>用画笔画下最美好的宠物 用书笔记下最难忘的故事</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 如果需要导航按钮 -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+              </div>
+              <div class="home-tab">
+                <div class="ht-item active">
+                  <div class="homeicon">
+                    <span></span>
+                  </div>
+                  <div class="txt">快乐交友</div>
+                  <div class="mask"></div>
+                </div>
+                <div class="ht-item">
+                  <div class="homeicon">
+                    <span></span>
+                  </div>
+                  <div class="txt">玄幻坐骑</div>
+                  <div class="mask"></div>
+                </div>
+                <div class="ht-item">
+                  <div class="homeicon">
+                    <span></span>
+                  </div>
+                  <div class="txt">浪漫婚礼</div>
+                  <div class="mask"></div>
+                </div>
+                <div class="ht-item">
+                  <div class="homeicon">
+                    <span></span>
+                  </div>
+                  <div class="txt">休闲养成</div>
+                  <div class="mask"></div>
+                </div>
+                <div class="ht-item">
+                  <div class="homeicon">
+                    <span></span>
+                  </div>
+                  <div class="txt">玩家同人</div>
+                  <div class="mask"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="pagination"></div>
+    </div>
+    <script>
+      // header导航条开始-------------------------
+      btnEvent($("ul.nav-content li"));
+      function btnEvent(jQobj) {
+        jQobj.mousemove(function(e) {
+          var x = (e.clientX || e.pageX) - $(this).offset().left;
+          var y = (e.clientY || e.pageY) - $(this).offset().top;
+          // console.log(x, y);
+          $(this)
+            .find(".circle")
+            .css({
+              left:
+                x -
+                $(this)
+                  .find(".circle")
+                  .width() /
+                  2,
+              top:
+                y -
+                $(this)
+                  .find(".circle")
+                  .height() /
+                  2
+            });
+          $(this).addClass("active");
+          $(this).mouseleave(function() {
+            $(this)
+              .removeClass("active")
+              .addClass("remove");
+          });
+          $(this).mouseenter(function() {
+            $(this).removeClass("remove");
+          });
+        });
+      }
+
+      var navTextArr = ["顶部", "入门", "社交", "萌宠", "活动", "圈子"];
+      var current = 0; //当前页面下标
+      var y = 0; //防抖
+      var clickAble = true; //防抖
+      function init() {
+        // 创建小点点 并添加点击事件
+        $(".wrap section").each(function(i, e) {
+          $("<span>" + navTextArr[i] + "</span>")
+            .appendTo(".pagination")
+            .click(function() {
+              // console.log($(this).index());
+              current = $(this).index();
+              showPic();
+            });
+        });
+        //高亮第一个小点点
+        $(".pagination")
+          .find("span")
+          .eq(0)
+          .addClass("active");
+      }
+      init(); //初始化
+
+      // 顶页点击事件
+      $(".step").on("click", "a", function() {
+        current = $(this).index() + 1;
+        showPic();
+      });
+      // 导航栏点击事件
+      var navClickAble = true;
+      $("ul.nav-content li").click(function() {
+        if (navClickAble) {
+          navClickAble = false;
+          console.log($(this).index());
+          current = $(this).index();
+          showPic();
+          navActive();
+        }
+      });
+      //高亮导航条
+      function navActive() {
+        $(".hoverBg").animate(
+          {
+            left: current * $("ul.nav-content li").width() + "px"
+          },
+          function() {
+            navClickAble = true;
+          }
+        );
+        $("ul.nav-content li")
+          .eq(current)
+          .css({
+            color: "white"
+          })
+          .siblings()
+          .css("color", "black");
+      }
+      // header导航条结束-------------------------
+
+      // 页面全屏滚动开始---------------------
+
+      //滚动触发事件
+      $("body").on("wheel", function() {
+        
+        y += event.deltaY; //通过y判定向上还是向下
+        // console.log(y);
+        if (clickAble) {
+          //每500ms只允许执行一次
+          clickAble = false;
+          setTimeout(function() {
+            if (y > 0) {
+              //下
+              nextPic();
+            } else if (y < 0) {
+              prevPic();
+            }
+            clickAble = true;
+            setTimeout(function() {
+              y = 0;
+            }, 0);
+          }, 300);
+        }
+      });
+
+      //下一页
+      function nextPic() {
+        current =
+          current >= $(".wrap section").length - 1 ? current : ++current;
+        // console.log("下一张");
+        showPic();
+      }
+      // 上一页
+      function prevPic() {
+        current = current <= 0 ? current : --current;
+        // console.log("上一张");
+        showPic();
+      }
+      //切换图片的方法
+      function showPic() {
+        $(".wrap section")
+          .eq(0)
+          .animate(
+            {
+              "margin-top": current * -93 + "vh"
+            },
+            function() {}
+          );
+        dotActive();
+        navActive();
+        //如果第一页 隐藏小点点
+        if (current == 0) {
+          $(".pagination").css("opacity", "0");
+        } else {
+          $(".pagination").css("opacity", "1");
+        }
+      }
+      //初始化
+      if (current == 0) {
+          $(".pagination").css("opacity", "0");
+        }
+      //高亮小点点
+      function dotActive() {
+        $(".pagination")
+          .find("span")
+          .eq(current)
+          .addClass("active")
+          .siblings()
+          .removeClass("active");
+      }
+      // 页面全屏滚动结束---------------------
+
+      // page3开始----------------------
+      //轮播图插件
+      function initSwiper(selecter) {
+        new Swiper(selecter, {
+          // observer:true,//修改swiper自己或子元素时，自动初始化swiper
+          // observeParents:true,//修改swiper的父元素时，自动初始化swiper
+          loop: true, // 循环模式选项
+
+          // 如果需要前进后退按钮
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev"
+          }
+        });
+      }
+
+      // 点击下一张
+      $(".slide-tab").on("click", ".item.next", function(e) {
+        console.log(1);
+        $(".slide-tab")
+          .children(".prev")
+          .removeClass("prev")
+          .addClass("next");
+        $(".slide-tab")
+          .children(".current")
+          .removeClass("current")
+          .addClass("prev");
+        $(this)
+          .removeClass("next")
+          .addClass("current");
+        shift();
+      });
+      // 点击上一张
+      $(".slide-tab").on("click", ".item.prev", function(e) {
+        console.log(1);
+        $(".slide-tab")
+          .children(".next")
+          .removeClass("next")
+          .addClass("prev");
+        $(".slide-tab")
+          .children(".current")
+          .removeClass("current")
+          .addClass("next");
+        $(this)
+          .removeClass("prev")
+          .addClass("current");
+        shift();
+      });
+
+      var o = true;
+      var t = true;
+      var th = true;
+      // 切换meipai显示隐藏
+      function shift() {
+        var i = $(".slide-tab")
+          .children(".current")
+          .index();
+        $(".menpai")
+          .eq(i)
+          .addClass("on")
+          .siblings()
+          .removeClass("on");
+
+        if (i == 0 && o) {
+          initSwiper("#one");
+          // o = false
+        } else if (i == 1 && t) {
+          initSwiper("#two");
+          // t = false
+        } else if (i == 2 && th) {
+          initSwiper("#three");
+          // th = false
+        }
+      }
+      shift();
+      // page3结束---------------------
+    </script>
+    <script>
+      // page4开始-------------------------
+      var source = "./images/";
+      var petArr = [
+        { path: "ssxlr.gif", petName: "神兽小龙人" },
+        { path: "zsdpx.gif", petName: "珍兽大胖熊" },
+        { path: "zsxfy.gif", petName: "珍兽小肥羊" },
+
+        { path: "lh.gif", petName: "灵鹤" },
+        { path: "lx.gif", petName: "灵犀" },
+        { path: "nt.gif", petName: "牛头" },
+
+        { path: "dzn.gif", petName: "大嘴鸟" },
+        { path: "hxm.gif", petName: "狐小萌" },
+        { path: "jtn.gif", petName: "九头鸟" },
+
+        { path: "qnby.gif", petName: "千年白猿" },
+        { path: "zsry.gif", petName: "珍兽如意" },
+        { path: "hxds.gif", petName: "浣熊大师" },
+
+        { path: "ehxz.gif", petName: "萼华仙子" },
+        { path: "ghjl.gif", petName: "桂花精灵" },
+        { path: "swqs.gif", petName: "死亡骑士" },
+
+        { path: "jh.gif", petName: "剑魂" },
+        { path: "ly.gif", petName: "翎羽" },
+        { path: "ll.gif", petName: "鹿灵" },
+
+        { path: "ss.gif", petName: "嵩鼠" },
+        { path: "tl.gif", petName: "贪狼" },
+        { path: "yyt.gif", petName: "月影兔" }
+      ];
+
+      var switchPet = 0;
+      function addPet() {
+        //先清空
+        $(".pet-list ul").html("");
+        // 再添加
+        $(".pet-list ul").append(`
+      <li>
+        <div class="pic">
+          <img src="${source}${petArr[switchPet].path}" alt="" />
+        </div>
+        <span>${petArr[switchPet].petName}</span>
+      </li>
+      <li>
+        <div class="pic">
+          <img src="${source}${petArr[switchPet + 1].path}" alt="" />
+        </div>
+        <span>${petArr[switchPet + 1].petName}</span>
+      </li>
+      <li>
+        <div class="pic">
+          <img src="${source}${petArr[switchPet + 2].path}" alt="" />
+        </div>
+        <span>${petArr[switchPet + 2].petName}</span>
+      </li>`);
+      }
+      // 一开始显示三张
+      addPet();
+      //点击换一组
+      $(".btn-change").click(function() {
+        switchPet += 3;
+        if (switchPet >= 21) {
+          switchPet = 0;
+        }
+        addPet();
+      });
+    </script>
+    <script>
+      // page5开始-----------------------
+      $(".pk-list ul").on("click", "li", function() {
+        // console.log($(this));
+        $(this)
+          .addClass("on")
+          .siblings()
+          .removeClass("on");
+      });
+      //让每个a按钮默认都是第一个
+      $(".pk-list ul li .pk-btn a:nth-of-type(1)").addClass("on");
+      //让每个a图片默认都是第一个
+      $(".pk-list ul li .pk-img a:nth-of-type(1)").addClass("on");
+      //切换
+      $(".pk-list ul li .pk-btn").on("click", "a", function() {
+        console.log($(this).index());
+        //切换图片
+        $(".pk-list ul li.on .pk-img a")
+          .eq($(this).index())
+          .addClass("on")
+          .siblings()
+          .removeClass("on");
+        // 切换按钮
+        $(this)
+          .addClass("on")
+          .siblings()
+          .removeClass("on");
+      });
+      //a图片间切换
+    </script>
+    <script>
+      // page6开始----------------------
+      var homeSwiper = new Swiper("#home", {
+        // direction: 'vertical', // 垂直切换选项
+        loop: true, // 循环模式选项
+
+        // 如果需要分页器
+        // pagination: {
+        //   el: '.swiper-pagination',
+        // },
+
+        // 如果需要前进后退按钮
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        },
+
+        // 如果需要滚动条
+        // scrollbar: {
+        //   el: '.swiper-scrollbar',
+        // },
+        // 回调函数，swiper从一个slide过渡到另一个slide结束时执行。
+        on: {
+          slideChangeTransitionStart: function() {
+            // alert(this.activeIndex); //切换结束时，告诉我现在是第几个slide
+            $.each($(".home-tab .ht-item"), function(i, e) {
+              $(e).removeClass("active");
+            });
+            var i = this.activeIndex - 1;
+            if (i >= $(".home-tab .ht-item").length) {
+              i = 0;
+            }
+            $(".home-tab .ht-item")
+              .eq(i)
+              .addClass("active");
+          }
+        }
+      });
+
+      $(".home-tab .ht-item").on("click", function() {
+        homeSwiper.slideTo($(this).index() + 1);
+        $(this)
+          .addClass("active")
+          .siblings()
+          .removeClass("active");
+      });
+      // page6结束---------------------
+    </script>
+  </body>
+</html>

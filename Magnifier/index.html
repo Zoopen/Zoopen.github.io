@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>放大镜</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #8ec5fc;
+        background-image: linear-gradient(62deg, #8ec5fc 0%, #e0c3fc 100%);
+        padding-top: 100px;
+      }
+      .stage {
+        /* background: red; */
+        width: 810px;
+        margin: 0 auto;
+        position: relative;
+      }
+      .stage::after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+      .stage .content {
+        /* float: left; */
+        background: violet;
+        width: 400px;
+        height: 400px;
+        /* overflow: hidden; */
+        position: relative;
+      }
+
+      .stage .content img {
+        width: 100%;
+        /* display: block; */
+        vertical-align: middle;
+        /* height: 100%; */
+      }
+
+      .mask {
+        width: 200px;
+        height: 200px;
+        background: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        top: 0;
+        left: 0;
+        visibility: hidden;
+
+        /* 鼠标穿透 */
+        pointer-events: none;
+      }
+
+      .stage .zoom {
+        width: 400px;
+        height: 400px;
+        position: absolute;
+        top: 0px;
+        left: 400px;
+        margin-left: 10px;
+        visibility: hidden;
+        background-image: url("./images/01.jpg");
+        background-repeat: no-repeat;
+        background-size: 200% auto;
+      }
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      ul.imglist {
+        margin-top: 5px;
+        width: 400px;
+        display: flex;
+        justify-content: space-around;
+      }
+      ul.imglist::after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+      ul.imglist li {
+        flex: 1;
+        text-align: center;
+      }
+
+      ul.imglist li.active {
+        border: 2px solid orange;
+        box-sizing: border-box;
+      }
+      ul.imglist li img {
+        width: 95px;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="stage">
+      <div class="content">
+        <img src="./images/01.jpg" alt="" />
+        <div class="mask"></div>
+      </div>
+      <div class="zoom"></div>
+      <ul class="imglist">
+        <li><img src="./images/01.jpg" alt="" /></li>
+        <li><img src="./images/02.jpg" alt="" /></li>
+        <li><img src="./images/03.jpg" alt="" /></li>
+        <li><img src="./images/04.jpg" alt="" /></li>
+      </ul>
+    </div>
+    <script>
+      var main = document.querySelector(".content");
+      var mask = document.querySelector(".mask");
+      var zoom = document.querySelector(".zoom");
+      var times = document.querySelector(".times");
+      var mainWidth = main.offsetWidth;
+      var currentTimes = 2;
+      main.onmousemove = function(e) {
+        var x = e.offsetX;
+        var y = e.offsetY;
+        // console.log(x, y);
+
+        // debugger;
+        x = x <= 100 ? 100 : x;
+        x = x >= 300 ? 300 : x;
+        y = y <= 100 ? 100 : y;
+        y = y >= 300 ? 300 : y;
+        if (y <= 100) {
+          y = 100;
+        }
+        if (y >= 300) {
+          y = 300;
+        }
+
+        // debugger;
+        // if(e.offsetX <= 100){
+        //     e.offsetX = 100
+        // }
+        // if(e.offsetX >= 300){
+        //     e.offsetX = 300
+        // }
+        // if(e.offsetY <= 100){
+        //     e.offsetY = 100
+        // }
+        // if( e.offsetY >= 300){
+        //     e.offsetY = 300
+        // }
+
+        main.style.cursor = "crosshair";
+
+        mask.style.top = y - 100 + "px";
+        mask.style.left = x - 100 + "px";
+        zoom.style.backgroundPositionY = (y - 100) * -2 + "px";
+        zoom.style.backgroundPositionX = (x - 100) * -2 + "px";
+      };
+      main.onmouseenter = function() {
+        mask.style.visibility = "visible";
+        zoom.style.visibility = "visible";
+      };
+      main.onmouseleave = function() {
+        mask.style.visibility = "hidden";
+        zoom.style.visibility = "hidden";
+      };
+
+      var lis = document.querySelectorAll(".imglist li");
+      // console.log(lis);
+      lis.forEach(function(e, i, arr) {
+        arr[0].classList.add("active");
+        e.onclick = function() {
+          // console.log(this);
+          lis.forEach(function(e) {
+            e.classList.remove("active");
+          });
+          this.classList.add("active");
+          // console.log(this.querySelector("img").getAttribute("src"));
+          main.querySelector("img").src = this.querySelector(
+            "img"
+          ).getAttribute("src");
+          zoom.style.backgroundImage =
+            "url(" + this.querySelector("img").getAttribute("src") + ")";
+        };
+      });
+    </script>
+  </body>
+</html>
