@@ -1,0 +1,196 @@
+body {
+  width: 100%;
+  height: 100vh;
+  background: #575757;
+  background: linear-gradient(to bottom, #a2bbb9, #c19fa8);
+  margin: 0;
+  perspective: 1900px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.stage {
+  width: 400px;
+  height: 600px;
+  border-radius: 10px;
+  background: url("600x600.jpg") no-repeat center;
+  background-size: cover;
+  margin: 0 auto;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50% 150px;
+  transform: rotateY(0deg) rotateX(0deg);
+  padding: 245px 0;
+  box-sizing: border-box;
+  transition: all 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.stage.active::before {
+  background-color: gray;
+  background: linear-gradient(0deg, rgba(0, 0, 200, 0.4), rgba(0, 0, 200, 0));
+}
+.stage.active h2:first-child {
+  transform: translateZ(50px);
+}
+.stage.active h2:last-child {
+  transform: translateZ(20px);
+}
+.stage.active p {
+  transform: translateZ(45px);
+}
+.stage::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  transition: all 0.6s;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.stage::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background: #000000;
+  box-shadow: 0 0 20px 0 #000000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transform: translateZ(-8px);
+}
+.stage h2 {
+  color: #fff;
+  transition: all 0.6s;
+}
+.stage p {
+  color: #fff;
+  transition: all 0.6s;
+}
+.stage .chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  perspective: 1900px;
+}
+.stage .chart.active .bar span {
+  color: #000000;
+}
+.stage .chart.active .bar.bar1 span.top {
+  transform: rotateZ(90deg) translateZ(180px);
+}
+.stage .chart.active .bar.bar1 span.right {
+  width: 180px;
+}
+.stage .chart.active .bar.bar1 span.front {
+  width: 180px;
+}
+.stage .chart.active .bar.bar2 span.top {
+  transform: rotateZ(90deg) translateZ(100px);
+}
+.stage .chart.active .bar.bar2 span.right {
+  width: 100px;
+}
+.stage .chart.active .bar.bar2 span.front {
+  width: 100px;
+}
+.stage .chart.active .bar.bar3 span.top {
+  transform: rotateZ(90deg) translateZ(140px);
+}
+.stage .chart.active .bar.bar3 span.right {
+  width: 140px;
+}
+.stage .chart.active .bar.bar3 span.front {
+  width: 140px;
+}
+.stage .chart.active .bar.bar4 span.top {
+  transform: rotateZ(90deg) translateZ(240px);
+}
+.stage .chart.active .bar.bar4 span.right {
+  width: 240px;
+}
+.stage .chart.active .bar.bar4 span.front {
+  width: 240px;
+}
+.stage .chart.active .bar.bar5 span.top {
+  transform: rotateZ(90deg) translateZ(80px);
+}
+.stage .chart.active .bar.bar5 span.right {
+  width: 80px;
+}
+.stage .chart.active .bar.bar5 span.front {
+  width: 80px;
+}
+.stage .chart.active .bar.bar6 span.top {
+  transform: rotateZ(90deg) translateZ(80px);
+}
+.stage .chart.active .bar.bar6 span.right {
+  width: 80px;
+}
+.stage .chart.active .bar.bar6 span.front {
+  width: 80px;
+}
+.stage .chart.active .bar.bar7 span.top {
+  transform: rotateZ(90deg) translateZ(120px);
+}
+.stage .chart.active .bar.bar7 span.right {
+  width: 120px;
+}
+.stage .chart.active .bar.bar7 span.front {
+  width: 120px;
+}
+.stage .chart .bar {
+  width: 25px;
+  height: 25px;
+  margin: 10px;
+  background: lightgrey;
+  text-align: center;
+  position: relative;
+  transform: rotateZ(-45deg);
+  transform-style: preserve-3d;
+}
+.stage .chart .bar span {
+  display: flex;
+  flex-direction: column;
+  width: 25px;
+  height: 25px;
+  background: maroon;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 1s;
+  color: rgba(0, 0, 0, 0);
+}
+.stage .chart .bar span.top {
+  width: 100%;
+  height: 100%;
+  background: #e8d1d1;
+  transform: rotateZ(90deg);
+}
+.stage .chart .bar span.right {
+  width: 0;
+  height: 25px;
+  background-color: gray;
+  background-image: linear-gradient(-90deg, #88b0c8 0%, #5b7786 100%);
+  transform-origin: left;
+  transform: rotateY(-90deg) rotateX(-90deg) translateZ(12.5px) translateY(12.5px);
+}
+.stage .chart .bar span.front {
+  width: 0;
+  height: 25px;
+  padding-right: 5px;
+  box-sizing: border-box;
+  text-align: right;
+  background-color: lightgrey;
+  background-image: linear-gradient(-90deg, #d1d5dd 0%, #a0c4d8 100%);
+  transform-origin: left;
+  transform: rotateY(-90deg);
+}
+/*# sourceMappingURL=./style.css.map */
