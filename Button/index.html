@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>幽灵按钮</title>
+    <script src="https://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        /* height: 100%; */
+        height: 100vh;
+        overflow-x: hidden;
+        color: white;
+        display: flex;
+        width: 100vw;
+        flex-wrap: wrap;
+        background-color: #2a364f96;
+        background-color: #8bc6ec;
+        background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+      }
+      .GG-content {
+        width: 180px;
+        flex: 1;
+        /* border: 1px solid red; */
+      }
+      .GG-content h3 {
+        text-align: center;
+      }
+      .GG {
+        width: 180px;
+        margin: 30px 0;
+        margin: 30px auto;
+      }
+
+      .GG button {
+        outline: none;
+        border: none;
+        /* border: 1px solid black; */
+        border-radius: 30px;
+        height: 60px;
+        width: 180px;
+        background: #f8b627;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .GG button span {
+        position: relative;
+        z-index: 1;
+        color: white;
+        font-size: 1.2em;
+      }
+
+      .GG button .circle {
+        width: 360px;
+        height: 360px;
+        border-radius: 50%;
+        background: rgba(20, 180, 87, 0.8);
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: scale(0);
+        transition: transform 0.6s;
+      }
+
+      .GG button.active .circle {
+        transform: scale(1);
+        transition: transform 0.3s ease;
+      }
+
+      .GG button.remove .circle {
+        background: rgba(129, 80, 108, 0.6);
+      }
+
+      .xxx button {
+        background: red;
+      }
+
+      .xxx button.remove .circle {
+        background: rgba(129, 80, 108, 0.6);
+      }
+
+      .xxx button .circle {
+        background: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="GG-content">
+      <h3>感知方向悬停按钮</h3>
+      <div class="GG yyy">
+        <button>
+          <span>这是一个按钮</span>
+          <div class="circle"></div>
+        </button>
+      </div>
+      <div class="GG yyy">
+        <button>
+          <span>这是一个按钮</span>
+          <div class="circle"></div>
+        </button>
+      </div>
+      <div class="GG zzz">
+        <button>
+          <span>这是一个按钮</span>
+          <div class="circle"></div>
+        </button>
+      </div>
+      <div class="GG zzz">
+        <button>
+          <span>这是一个按钮</span>
+          <div class="circle"></div>
+        </button>
+      </div>
+    </div>
+    <script>
+      // $(".GG").mousemove(function (e) {
+      //     var x = (e.clientX || e.pageX) - $(this).offset().left
+      //     var y = (e.clientY || e.pageY) - $(this).offset().top
+      //     // console.log(x, y);
+      //     $(".circle").css({
+      //         left: x-$(".circle").width()/2,
+      //         top: y-$(".circle").height()/2
+      //     })
+      //     $("button").addClass("active")
+      // }).mouseleave(function(){
+      //     $("button").removeClass("active").addClass("remove")
+      // }).mouseenter(function(){
+      //     $("button").removeClass("remove")
+      // })
+      btnEvent($(".xxx"));
+      btnEvent($(".yyy"));
+      btnEvent($(".zzz"));
+      btnEvent($(".zzz"));
+      function btnEvent(jQobj) {
+        jQobj.mousemove(function(e) {
+          var x = (e.clientX || e.pageX) - $(this).offset().left;
+          var y = (e.clientY || e.pageY) - $(this).offset().top;
+          // console.log(x, y);
+          $(this)
+            .find(".circle")
+            .css({
+              left:
+                x -
+                $(this)
+                  .find(".circle")
+                  .width() /
+                  2,
+              top:
+                y -
+                $(this)
+                  .find(".circle")
+                  .height() /
+                  2
+            });
+          $(this)
+            .find("button")
+            .addClass("active");
+          $(this).mouseleave(function() {
+            $(this)
+              .find("button")
+              .removeClass("active")
+              .addClass("remove");
+          });
+          $(this).mouseenter(function() {
+            $(this)
+              .find("button")
+              .removeClass("remove");
+          });
+        });
+      }
+    </script>
+    <!-- --------------------------------------------------------------- -->
+    <!-- ------------------------------------------幽灵按钮---------------------------------------- -->
+
+    <!-- 第一个 -->
+    <style>
+      .ghostButton {
+        flex: 1;
+        width: 200px;
+        /* border: 1px solid red; */
+        margin-left: 20px;
+      }
+      .ghostButton h3 {
+        text-align: center;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 0);
+      }
+
+      .box span {
+        display: inline-block;
+        background: #c2973c;
+        position: absolute;
+      }
+
+      .box span:nth-child(1) {
+        top: 0;
+        left: 50%;
+        transform: translate(-50%);
+      }
+
+      .box span:nth-child(2) {
+        right: 0;
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+
+      .box span:nth-child(3) {
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%);
+      }
+
+      .box span:nth-child(4) {
+        left: 0;
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+    </style>
+    <div class="ghostButton">
+      <h3>幽灵按钮</h3>
+      <div class="content">
+        <div class="box">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <script>
+        $(function() {
+          $(".box span")
+            .eq(0)
+            .css({
+              width: $(".box").width(),
+              height: 2
+            });
+          $(".box span")
+            .eq(2)
+            .css({
+              width: $(".box").width(),
+              height: 2
+            });
+          $(".box span")
+            .eq(1)
+            .css({
+              height: $(".box").height(),
+              width: 2
+            });
+          $(".box span")
+            .eq(3)
+            .css({
+              height: $(".box").height(),
+              width: 2
+            });
+
+          $(".box").mouseenter(function() {
+            console.log(1);
+
+            $(".box span")
+              .eq(0)
+              .animate({
+                width: 0
+              });
+            $(".box span")
+              .eq(2)
+              .animate({
+                width: 0
+              });
+            $(".box span")
+              .eq(1)
+              .animate({
+                height: 0
+              });
+            $(".box span")
+              .eq(3)
+              .animate({
+                height: 0
+              });
+          });
+          $(".box").mouseleave(function() {
+            console.log(1);
+
+            $(".box span")
+              .eq(0)
+              .animate({
+                width: $(".box").width()
+              });
+            $(".box span")
+              .eq(2)
+              .animate({
+                width: $(".box").width()
+              });
+            $(".box span")
+              .eq(1)
+              .animate({
+                height: $(".box").height()
+              });
+            $(".box span")
+              .eq(3)
+              .animate({
+                height: $(".box").height()
+              });
+          });
+        });
+
+        // $(".box img").click(function(e){
+        //     console.log(e.offsetX,e.offsetY);
+        //     console.log($(this).width()/2);
+        //     if(e.offsetX>$(this).width()/2){
+        //         console.log("點擊了右邊 下一張");
+        //     }else{
+        //         console.log("點擊了左邊 上一張");
+        //     }
+
+        // })
+      </script>
+      <!-- 第二个 -->
+      <style>
+        .box2 {
+          width: 150px;
+          height: 50px;
+          margin: 50px auto;
+          position: relative;
+          border: 3px solid black;
+        }
+
+        .box2 span {
+          display: inline-block;
+          background: black;
+          position: absolute;
+        }
+
+        .box2 span:nth-child(1) {
+          top: -50px;
+          right: 0;
+          transform: translate(125%);
+        }
+
+        .box2 span:nth-child(2) {
+          right: -50px;
+          bottom: 0;
+          transform: translate(0, 100%);
+        }
+
+        .box2 span:nth-child(3) {
+          bottom: -50px;
+          left: 0;
+          transform: translate(-100%);
+        }
+
+        .box2 span:nth-child(4) {
+          left: -50px;
+          top: 0;
+          transform: translate(0, -100%);
+        }
+      </style>
+      <div class="box2">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <script>
+        var enterAble = true;
+        $(".box2").on("mouseenter", function() {
+          if (!enterAble) return;
+          enterAble = false;
+          $(".box2 span")
+            .eq(0)
+            .animate(
+              {
+                top: 0,
+                height: 50,
+                width: 2
+              },
+              "fast"
+            );
+          $(".box2 span")
+            .eq(1)
+            .animate(
+              {
+                right: 0,
+                width: 50,
+                height: 2
+              },
+              "fast"
+            );
+          $(".box2 span")
+            .eq(2)
+            .animate(
+              {
+                bottom: 0,
+                height: 50,
+                width: 2
+              },
+              "fast"
+            );
+          $(".box2 span")
+            .eq(3)
+            .animate(
+              {
+                left: 0,
+                width: 50,
+                height: 2
+              },
+              "fast"
+            );
+        });
+        $(".box2").mouseleave(function() {
+          $(".box2 span")
+            .eq(0)
+            .animate(
+              {
+                top: -50,
+                height: 0
+              },
+              "fast"
+            );
+          $(".box2 span")
+            .eq(1)
+            .animate(
+              {
+                right: -50,
+                width: 0
+              },
+              "fast"
+            );
+          $(".box2 span")
+            .eq(2)
+            .animate(
+              {
+                bottom: -50,
+                height: 0
+              },
+              "fast"
+            );
+          $(".box2 span")
+            .eq(3)
+            .animate(
+              {
+                left: -50,
+                width: 0
+              },
+              "fast",
+              function() {
+                enterAble = true;
+              }
+            );
+        });
+      </script>
+      <!-- 第三个 -->
+      <style>
+        .box3 {
+          width: 150px;
+          height: 50px;
+          margin: 50px auto;
+          border: 2px solid lightgray;
+          position: relative;
+        }
+
+        .box3 span {
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translate(-50%);
+          display: inline-block;
+          background-color: black;
+        }
+      </style>
+      <div class="box3">
+        <span></span>
+      </div>
+      <script>
+        $(".box3").mouseenter(function() {
+          console.log(1);
+          $(this)
+            .find("span")
+            .animate({
+              width: $(this).width(),
+              height: 2
+            });
+        });
+        $(".box3").mouseleave(function() {
+          console.log(1);
+          $(this)
+            .find("span")
+            .animate({
+              width: 0,
+              height: 0
+            });
+        });
+      </script>
+    </div>
+    <!-- --------------------------------------------------------------- -->
+    <!-- -----------------------------ihover按钮---------------------------------- -->
+    <!-- 第一个 -->
+    <style>
+      .hoverContent{
+        flex: 2.5;
+        /* border: 1px solid red; */
+      }
+      .images-item {
+        width: 200px;
+        height: 200px;
+        /* margin: 40px auto; */
+        margin-left: 40px;
+        margin-bottom: 20px;
+        float: left;
+        position: relative;
+      }
+
+      .images-item .img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        transition: all 0.3s;
+      }
+
+      .images-item .img img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        vertical-align: middle;
+      }
+
+      .images-item .rotate {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 200px;
+        transition: all 0.6s;
+        border-radius: 50%;
+        border-width: 10px;
+        border-style: solid;
+        border-color: rosybrown lightgreen lightgreen rosybrown;
+        box-sizing: border-box;
+      }
+
+      .images-item:hover .rotate {
+        transform: rotate(180deg);
+        background: rgba(0, 0, 0, 0.7);
+      }
+
+      .images-item:hover .info {
+        opacity: 1;
+      }
+
+      .images-item .info {
+        position: absolute;
+        top: 25%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        color: white;
+        opacity: 0;
+        transition: all 0.6s;
+      }
+
+      .info .info-back {
+        text-align: center;
+      }
+
+      .info .info-back h3 {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 0 30px;
+      }
+
+      .info .info-back p {
+        font-weight: 100;
+        font-size: 12px;
+        padding: 10px 0;
+        border-top: 1px solid gray;
+        margin: 0 30px;
+        font-style: italic;
+        color: lightgray;
+      }
+    </style>
+    
+<!-- 第二个 -->
+    <style>
+      .images-item2 {
+        width: 200px;
+        height: 200px;
+        /* margin: 40px auto; */
+        margin-right: 40px;
+        margin-bottom: 20px;
+        float: right;
+        position: relative;
+        /* overflow: hidden; */
+        /* border-radius: 50%; */
+      }
+      .images-item2 .rotate {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 200px;
+        transition: all 0.6s;
+        border-radius: 50%;
+        border-width: 10px;
+        border-style: solid;
+        border-color: rgba(255, 255, 255, 0.5);
+        box-sizing: border-box;
+      }
+      .images-item2 .img {
+        width: 100%;
+        height: 100%;
+        transition: all 0.6s;
+        overflow: hidden;
+        border-radius: 50%;
+      }
+      .images-item2 .img img {
+        width: 100%;
+        height: 100%;
+      }
+      .images-item2:hover .img {
+        transform: rotate(-90deg);
+      }
+      .images-item2:hover .info {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(0);
+      }
+      .images-item2 .info {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        transform: translate(-200%);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        color: white;
+        border-radius: 50%;
+        transition: all 0.6s;
+      }
+      .images-item2 .info .info-back {
+        margin-top: 25%;
+      }
+    </style>
+    
+    <!-- 第三个 -->
+    <style>
+      .images-item3 {
+        position: relative;
+        width: 300px;
+        height: 200px;
+        color: #fff;
+        float: left;
+      }
+      .images-item3:hover .info {
+        opacity: 1;
+      }
+      .images-item3:hover .info .info-back h3 {
+        top: 0px;
+        opacity: 1;
+      }
+      .images-item3:hover .info .info-back p {
+        top: 0;
+        opacity: 1;
+      }
+      .images-item3:hover .img img {
+        transform: scale(1.2);
+      }
+      .images-item3 .img {
+        overflow: hidden;
+      }
+      .images-item3 .img img {
+        transition: all 0.6s;
+      }
+      .images-item3 .info {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        transition: all 0.6s;
+        opacity: 0;
+      }
+      .images-item3 .info .info-back {
+      }
+      .images-item3 .info .info-back h3 {
+        background-color: rgba(0, 0, 0, 0.8);
+        position: relative;
+        top: -20px;
+        padding: 10px 0;
+        opacity: 0;
+        transition: all 0.6s;
+      }
+      .images-item3 .info .info-back p {
+        position: relative;
+        font-size: 12px;
+        color: #ccc;
+        transition: all 0.6s;
+        opacity: 0;
+        top: 60px;
+      }
+    </style>
+    
+    <!-- 第四个 -->
+    <style>
+      .images-item4 {
+          width: 300px;
+          height: 200px;
+          position: relative;
+          overflow: hidden;
+          float: right;
+      }
+
+      .images-item4:hover .mask1{
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 361px;
+          height: 361px;
+          background: rgba(0, 0, 0, .5);
+          transform: rotate(-33.69deg) translateX(18px) translateY(96px);
+      }
+      .images-item4 .mask1{
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 361px;
+          height: 361px;
+          background: rgba(0, 0, 0, .5);
+          transition: all .3s;
+          transform: rotate(-33.69deg) translateX(18px) translateY(266px);
+      }
+      .images-item4:hover .mask2{
+        position: absolute;
+          top: 0;
+          left: 0;
+          width: 361px;
+          height: 361px;
+          background: rgba(0, 0, 0, .5);
+          transform: rotate(-33.69deg) translateX(18px) translateY(-265px);
+      }
+      .images-item4 .mask2{
+        position: absolute;
+          top: 0;
+          left: 0;
+          width: 361px;
+          height: 361px;
+          background: rgba(0, 0, 0, .5);
+          transition: all .3s;
+          transform: rotate(-33.69deg) translateX(18px) translateY(-431px);
+      }
+      .images-item4:hover .info {
+          width: 300px;
+          text-align: center;
+          background: #111111;
+          color: white;
+          position: absolute;
+          /* transition: all .6s; */
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+      }
+      .images-item4 .info {
+          width: 360px;
+          text-align: center;
+          background: #111111;
+          color: white;
+          position: absolute;
+          transition: all .6s;
+          transition-delay: 0.3s;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%) rotate(-33.69deg) rotateX(90deg);
+      }
+      .images-item4 .info .info-back {
+      }
+      .images-item4 .info .info-back h3 {
+          margin: 0;
+          line-height: 40px;
+          border-bottom: .5px solid white;
+          text-transform: uppercase;
+          font-weight: lighter;
+      }
+      .images-item4 .info .info-back p {
+          margin: 0;
+          font-size: 12px;
+          line-height: 80px;
+          font-style: italic;
+      }
+    </style>
+    <div class="hoverContent">
+      <h2>ihover</h2>
+
+      <!-- 第一个 -->
+    <div class="images-item">
+      <div class="img">
+        <div class="rotate"></div>
+        <img src="./img/2.jpg" alt="" />
+      </div>
+      <div class="info">
+        <div class="info-back">
+          <h3>Heading here</h3>
+          <p>Description goes here</p>
+        </div>
+      </div>
+    </div>
+    <!-- 第二个 -->
+    <div class="images-item2">
+      <div class="img">
+        <div class="rotate"></div>
+        <img src="./img/4.jpg" alt="" />
+      </div>
+      <div class="info">
+        <div class="info-back">
+          <h3>Heading here</h3>
+          <p>Description goes here</p>
+        </div>
+      </div>
+    </div>
+    <!-- 第三个 -->
+    <div class="images-item3">
+      <div class="img">
+        <img src="./img/1.jpg" alt="" />
+      </div>
+      <div class="info">
+        <div class="info-back">
+          <h3>Heading here</h3>
+          <p>Description goes here</p>
+        </div>
+      </div>
+    </div>
+    <!-- 第四个  -->
+    <div class="images-item4">
+      <div class="img">
+        <img src="./img/1.jpg" alt="" />
+      </div>
+      <div class="mask1"></div>
+      <div class="mask2"></div>
+      <div class="info">
+        <div class="info-back">
+          <h3>Heading here</h3>
+          <p>Description goes here</p>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- --------------------------------------------------------------- -->
+    <!-- --------------------------面向对象表单按钮美化-------------------------- -->
+    <style>
+      .switchContent {
+        /* width: fit-content; */
+        /* border: 1px solid red; */
+        flex: 1;
+        width: 200px;
+        margin-left: 20px;
+      }
+      .switchContent h3 {
+        text-align: center;
+      }
+      .switchContent label {
+        display: block;
+        width: fit-content;
+        border: 1px solid lightgrey;
+        border-radius: 5px;
+        margin-bottom: 5px;
+      }
+      .switchBtn {
+        position: relative;
+      }
+      .switchBtn::after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+
+      .switchBtn p {
+        line-height: 30px;
+        float: left;
+        margin: 0;
+        font-size: 19px;
+        color: #1c1c1c;
+        font-weight: 400;
+        margin-left: 10px;
+        margin-right: 5px;
+      }
+      .switch {
+        width: 70px;
+        height: 30px;
+        padding: 2px;
+        border-radius: 50px;
+        background: lightgray;
+        transition: all 0.5s;
+        overflow: hidden;
+        float: left;
+      }
+
+      .switchBtn input {
+        display: none;
+      }
+
+      .switch-content {
+        width: 160%;
+        height: 100%;
+        overflow: hidden;
+        text-align: center;
+        margin-left: -40px;
+        transition: all 0.5s;
+      }
+
+      /* .switch-content.active {
+  margin-left: 0px;
+} */
+      .switch.active .switch-content {
+        margin-left: 0px;
+      }
+      .switch.active {
+        background: lightseagreen;
+      }
+
+      .switch-content span {
+        width: 30px;
+        height: 30px;
+        padding: 0 5px;
+        line-height: 30px;
+        float: left;
+        font-size: 1.2em;
+        color: white;
+      }
+
+      .switch .dot {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: white;
+        float: left;
+      }
+    </style>
+    <form action="" class="switchContent">
+      <h3>表单按钮美化</h3>
+      <input type="submit" value="测试提交" />
+    </form>
+    <script>
+      class CreateSwitch {
+        constructor(obj) {
+          // 对象解构赋值
+          ({
+            selector: this.selector,
+            type: this.type,
+            name: this.name,
+            value: this.value,
+            text: this.text = "",
+            onText: this.onText = "",
+            offText: this.offText = ""
+          } = obj);
+        }
+        init() {
+          // console.log(this.selector);
+          let container = $(this.selector);
+          container.append(`
+      <label class="switchBtn ${this.name}">
+        <input type="${this.type}" name="${this.name}" value="${this.value}"/>
+        <div class="switch">
+          <div class="switch-content">
+            <span>${this.onText}</span>
+            <div class="dot"></div>
+            <span>${this.offText}</span>
+          </div>
+        </div>
+        <p>${this.text}</p>
+
+      </label>
+      `);
+          // 下面this指向不对，使用一个变量存实例的属性
+          var n = this.name;
+          $(`.switchContent label.${this.name}`)
+            //这里的off是每次添加时间前清空前面的事件 避免点击后触发多次事件
+            .off("click")
+            .on("click", function() {
+              // console.log($(this));
+              //点击后默认是选中
+
+              // 分两种，一种是checkbox,一种是radio
+              if (
+                $(this)
+                  .children("input")
+                  .attr("type") == "checkbox"
+              ) {
+                //选中的话添加个类 否则删除类
+                if (
+                  $(this)
+                    .children("input")
+                    .prop("checked")
+                ) {
+                  $(this)
+                    .find(".switch")
+                    .addClass("active");
+                } else {
+                  $(this)
+                    .find(".switch")
+                    .removeClass("active");
+                }
+              } else {
+                // 以下是radio时触发的事件
+                if (
+                  $(this)
+                    .children("input")
+                    .prop("checked")
+                ) {
+                  // console.log($(this).attr("class"));
+                  $(this)
+                    .find(".switch")
+                    .addClass("active");
+                } else {
+                  // console.log($(this).siblings(`.${n}`));
+                  $(this)
+                    .siblings(`.${n}`)
+                    .find(".switch")
+                    .removeClass("active");
+                }
+              }
+            });
+        }
+      }
+      /* selector选择插入的地方 */
+      var s1 = new CreateSwitch({
+        selector: ".switchContent",
+        type: "checkbox",
+        name: "course",
+        value: "pe",
+        text: "体育课"
+      });
+
+      var s2 = new CreateSwitch({
+        selector: ".switchContent",
+        type: "checkbox",
+        name: "course",
+        value: "math",
+        text: "数学课",
+        onText: "是",
+        offText: "否"
+      });
+      var s3 = new CreateSwitch({
+        selector: ".switchContent",
+        type: "checkbox",
+        name: "course",
+        value: "chinese",
+        text: "语文课",
+        onText: "yes",
+        offText: "No"
+      });
+      var s4 = new CreateSwitch({
+        selector: ".switchContent",
+        type: "checkbox",
+        name: "isOn",
+        value: "on",
+        text: "开灯",
+        onText: "on",
+        offText: "off"
+      });
+      $(".switchContent").append("<p>复选</p>");
+
+      s1.init();
+      s2.init();
+      s3.init();
+      // s4.init();
+
+      var sr1 = new CreateSwitch({
+        selector: ".switchContent",
+        type: "radio",
+        name: "gender",
+        value: "male",
+        text: "男"
+      });
+      var sr2 = new CreateSwitch({
+        selector: ".switchContent",
+        type: "radio",
+        name: "gender",
+        value: "female",
+        text: "女"
+      });
+      $(".switchContent").append("<p>单选</p>");
+      sr1.init();
+      sr2.init();
+      var sr3 = new CreateSwitch({
+        selector: ".switchContent",
+        type: "radio",
+        name: "isMarried",
+        value: "single",
+        text: "单身"
+      });
+      var sr4 = new CreateSwitch({
+        selector: ".switchContent",
+        type: "radio",
+        name: "isMarried",
+        value: "married",
+        text: "已婚"
+      });
+      sr3.init();
+      sr4.init();
+    </script>
+  </body>
+</html>
