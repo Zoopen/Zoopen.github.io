@@ -33,6 +33,14 @@ const routes = [
   {
     path:'/player',
     component:Player,
+  },
+  {
+    path:'/singerpage',
+    component:()=>import('@/views/SingerPage.vue')
+  },
+  {
+    path:'/mvpage',
+    component:()=>import('@/views/MVPage.vue')
   }
 
 ]

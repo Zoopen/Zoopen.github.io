@@ -1,54 +1,110 @@
 <template>
-  <div class="playlist" v-if="playlist">
-    <div class="go-back" @click="goBack">←</div>
-    <div class="playlist-header">
-      <div class="left">
-        <div class="cover">
-          <img :src="playlist.coverImgUrl" alt="" />
-          <span>{{ playlist.playCount }}</span>
-        </div>
+  <div>
+    <div class="playlist" v-if="playlist">
+      <div class="go-back" @click="goBack">
+        <img src="@/assets/left.png" alt="" />
       </div>
-      <div class="right">
-        <div class="name">{{ playlist.name }}</div>
-        <div class="author">
-          <div class="touxiang">
-            <img :src="creator.avatarUrl" alt="" />
-          </div>
-          <div class="nickname">
-            {{ creator.nickname }}
+      <div class="playlist-header">
+        <div class="left">
+          <div class="cover">
+            <img :src="playlist.coverImgUrl" alt="" />
+            <span>{{ playlist.playCount }}</span>
           </div>
         </div>
+        <div class="right">
+          <div class="name">{{ playlist.name }}</div>
+          <div class="author">
+            <div class="touxiang">
+              <img :src="creator.avatarUrl" alt="" />
+            </div>
+            <div class="nickname">
+              {{ creator.nickname }}
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="playlist-intro">
-      <div class="tags">
-        标签:<Tag v-for="(item, index) in tags" :key="index" :item="item"></Tag>
+      <div class="playlist-intro">
+        <div class="tags">
+          标签:<Tag v-for="(item, index) in tags" :key="index" :item="item"></Tag>
+        </div>
+        <div class="description" :class="{ hide: hide }">
+          <span class="desc-text">简介:{{ playlist.description }}</span>
+          <i v-if="hide" @click="hide = false"><img src="@/assets/down.png" alt=""/></i>
+          <i v-else @click="hide = true"><img src="@/assets/up.png" alt=""/></i>
+        </div>
       </div>
-      <div class="description" :class="{hide:hide}">
-        <span class="desc-text">简介:{{ playlist.description }}</span>
-        <i v-if="hide" @click="hide=false"><img src="@/assets/down.png" alt=""/></i>
-        <i v-else @click="hide=true"><img src="@/assets/up.png" alt=""/></i>
-      </div>
-    </div>
 
-    <div class="listTitle">
-      歌曲列表
-    </div>
+      <div class="listTitle">
+        歌曲列表
+      </div>
 
-    <SongItem
-      v-for="(item, index) in tracks"
-      :key="index"
-      :item="item"
-      :index="index"
-      :song-list="tracks"
-      :item-index="index"
-      @currentItem="$emit('currentItem', $event)"
-    ></SongItem>
-    <div class="listTitle">
-      精彩评论
+      <SongItem
+        v-for="(item, index) in tracks"
+        :key="index"
+        :item="item"
+        :index="index"
+        :song-list="tracks"
+        :item-index="index"
+        @currentItem="$emit('currentItem', $event)"
+      ></SongItem>
+      <div class="listTitle">
+        精彩评论
+      </div>
+      <Comment v-for="(item, index) in comments" :key="'c' + index" :item="item"></Comment>
+      <!-- <Comment :item="comments"></Comment> -->
     </div>
-    <Comment v-for="(item, index) in comments" :key="'c' + index" :item="item"></Comment>
-    <!-- <Comment :item="comments"></Comment> -->
+    <div class="albumList" v-if="album">
+      <div class="go-back" @click="goBack">
+        <img src="@/assets/left.png" alt="" />
+      </div>
+      <div class="playlist-header">
+        <div class="left">
+          <div class="cover">
+            <img :src="album.blurPicUrl" alt="" />
+            <!-- <span>{{ playlist.playCount }}</span> -->
+          </div>
+        </div>
+        <div class="right">
+          <div class="name">{{ album.name }}</div>
+          <div class="author2">
+            歌手:
+            <span class="nickname2">
+              {{ album.artist.name }}
+            </span>
+          </div>
+          <div class="publish-time">发行时间: {{ publishTime }}</div>
+        </div>
+      </div>
+      <div class="album-intro">
+        <!-- <div class="tags">
+          标签:<Tag v-for="(item, index) in tags" :key="index" :item="item"></Tag>
+        </div> -->
+        <div class="description" :class="{ hide: hide }">
+          <span class="desc-text">简介:{{ album.description }}</span>
+          <i v-if="hide" @click="hide = false"><img src="@/assets/down.png" alt=""/></i>
+          <i v-else @click="hide = true"><img src="@/assets/up.png" alt=""/></i>
+        </div>
+      </div>
+
+      <div class="listTitle">
+        歌曲列表
+      </div>
+
+      <SongItem
+        v-for="(item, index) in songs"
+        :key="index"
+        :item="item"
+        :index="index"
+        :song-list="songs"
+        :item-index="index"
+        @currentItem="$emit('currentItem', $event)"
+      ></SongItem>
+      <div class="listTitle">
+        精彩评论
+      </div>
+      <Comment v-for="(item, index) in albumComments" :key="'c' + index" :item="item"></Comment>
+      <!-- <Comment :item="comments"></Comment> -->
+    </div>
   </div>
 </template>
 
@@ -57,7 +113,7 @@ import SongItem from "@/components/SongItem.vue";
 import Tag from "@/components/Tag.vue";
 import Comment from "@/components/Comment.vue";
 export default {
-  name:"playlist",
+  name: "playlist",
   components: {
     SongItem,
     Tag,
@@ -71,10 +127,30 @@ export default {
       creator: null,
       tags: [],
       comments: null,
-      hide:true
+      hide: true,
+
+      album: null,
+      songs: null,
+      albumComments: null,
+      publishTime: null
     };
   },
+  watch: {
+    album() {
+      this.timeMaker(this.album.publishTime);
+    }
+  },
   methods: {
+    timeMaker(t) {
+      var date = new Date(t); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      var Y = date.getFullYear() + "-";
+      var M = (date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1) + "-";
+      var D = date.getDate() + " ";
+      // var h = date.getHours() + ":";
+      // var m = date.getMinutes() + ":";
+      // var s = date.getSeconds();
+      this.publishTime = Y + M + D;
+    },
     goBack() {
       this.$router.go(-1);
     },
@@ -114,6 +190,26 @@ export default {
         this.comments = res.data.comments;
       });
     },
+    //获取专辑
+    getAlbumDetail(id) {
+      this.axios
+        .get("https://musicapi.leanapp.cn/album/", {
+          params: {
+            id: id
+          }
+        })
+        .then(response => {
+          window.console.log(response);
+          ({ album: this.album } = response.data);
+          ({ songs: this.songs } = response.data);
+        });
+    },
+    getAlbumComment(id) {
+      this.axios.get("https://musicapi.leanapp.cn/comment/album?id=" + id).then(res => {
+        window.console.log(res);
+        this.albumComments = res.data.comments;
+      });
+    },
     translatePlayCount(n) {
       if (n > 99999999) {
         return (n / 100000000).toFixed(2) + "亿";
@@ -129,9 +225,16 @@ export default {
     // 因为当守卫执行前，组件实例还没被创建
     window.console.log(to, from);
     next(vm => {
-      // window.console.log(vm);
-      vm.getDetail(to.query.id);
-      vm.getComment(to.query.id);
+      window.console.log(vm);
+      window.console.log(from);
+      if (from.path == "/search") {
+        vm.playlist = null;
+        vm.getAlbumDetail(to.query.id);
+        vm.getAlbumComment(to.query.id);
+      } else {
+        vm.getDetail(to.query.id);
+        vm.getComment(to.query.id);
+      }
     });
   }
 };
@@ -202,6 +305,20 @@ export default {
         color: rgba(255, 255, 255, 0.7);
       }
     }
+    .author2 {
+      display: flex;
+      margin-top: 20px;
+      height: 30px;
+      color: rgba(255, 255, 255, 0.5);
+      .nickname2 {
+        margin-left: 5px;
+        color: #fff;
+      }
+    }
+    .publish-time {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 12px;
+    }
   }
 }
 .playlist-intro {
@@ -234,11 +351,51 @@ export default {
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
     }
-    i{
+    i {
       position: absolute;
       bottom: 0;
       right: 0;
-      img{
+      img {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+}
+.album-intro {
+  padding: 10px 10px 0 15px;
+  .tags {
+    line-height: 20px;
+    font-size: 14px;
+    margin: 10px 0;
+    .tag {
+      font-size: 12px;
+      margin: 0 5px;
+      padding: 1px 8px;
+      border: 1px solid lightgray;
+      border-radius: 10px;
+    }
+  }
+  .description {
+    font-size: 14px;
+    padding-bottom: 18px;
+    position: relative;
+    // display: -webkit-box;
+    // -webkit-line-clamp: 2;
+    // -webkit-box-orient: vertical;
+    // overflow: hidden;
+    &.hide .desc-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+    i {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      img {
         width: 15px;
         height: 15px;
       }

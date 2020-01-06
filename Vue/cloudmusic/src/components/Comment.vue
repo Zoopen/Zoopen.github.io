@@ -102,6 +102,9 @@ export default {
     .comment-replied{
         font-size: 14px;
         color: #888;
+        border: 1px solid rgb(240, 238, 238);
+        margin: 5px 0;
+        padding: 10px;
     }
   }
 }

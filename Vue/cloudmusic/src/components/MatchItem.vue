@@ -1,7 +1,7 @@
 <template>
   <li class="matchitem">
     <template v-if="mv">
-      <div class="mv">
+      <div class="mv" @click="$router.push({path:'mvpage',query:{id:mv.id}})">
         <div class="left">
           <img :src="mv.cover" alt="" />
         </div>
@@ -19,7 +19,7 @@
       </div>
     </template>
     <template v-else-if="artist">
-      <div class="artist">
+      <div class="artist" @click="$router.push({path:'singerpage',query:{id:artist[0].id}})">
         <div class="left">
           <img :src="artist[0].img1v1Url" alt="" />
         </div>
@@ -36,7 +36,7 @@
       </div>
     </template>
     <template v-else>
-      <div class="album" @click="getAlbumDetail(album[0].id)">
+      <div class="album" @click="$router.push({path:'playlist',query:{id:album[0].id}})" >
         <div class="left">
           <img :src="album[0].blurPicUrl" alt="" />
         </div>

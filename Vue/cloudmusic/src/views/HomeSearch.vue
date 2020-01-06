@@ -13,7 +13,6 @@
         />
       </label>
     </form>
-    <hr />
     <div class="hot-list" v-if="!searchText">
       <h3>热门搜索</h3>
       <ul class="hot-search">
@@ -107,7 +106,7 @@ export default {
 form {
   padding: 15px 10px;
   height: 60px;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid rgb(241, 238, 238);
   label {
     position: relative;
     .search-icon {

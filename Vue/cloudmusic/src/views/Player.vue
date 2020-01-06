@@ -4,7 +4,7 @@
     :class="{ paused: isPaused, active: isShowFullScreenPlayer }"
     v-if="currentSongDetail"
   >
-    <audio v-if="currentSongId" :src="currentSongUrl" controls autoplay></audio>
+    <audio v-if="currentSongId" :src="currentSongUrl" autoplay></audio>
     <div class="player-bar" @click="showFullScreen">
       <img class="pic" :src="currentSongDetail.al.picUrl" alt />
       <h3>{{ currentSongDetail.name }}</h3>
@@ -37,36 +37,19 @@
           </div>
           <!-- 中间 -->
           <div class="player-fullscreen-content-middle">
-            <!-- 唱片 -->
-            <div class="music-player-disc">
-              <!-- 唱片图片 -->
-              <div class="music-player-image">
-                <img class="disc_default" src="@/assets/disc_default.png" alt="" />
-                <img class="disc" src="@/assets/disc.png" alt="" />
-                <img class="disc_light" src="@/assets/disc_light.png" alt="" />
-                <img class="disc_pic" :src="currentSongDetail.al.picUrl" alt="" />
-              </div>
-              <!-- 指针 -->
-              <div class="music-player-pointer">
-                <img src="@/assets/needle.png" alt="" />
-              </div>
-            </div>
-            <div class="player-control-btn">
-              <div class="player-control-btn-content">
-                <div class="like">
-                  <img src="@/assets/like.png" alt="" />
-                </div>
-                <div class="download">
-                  <img src="@/assets/download.png" alt="" />
-                </div>
-                <div class="msg">
-                  <img src="@/assets/msg.png" alt="" />
-                </div>
-                <div class="more">
-                  <img src="@/assets/more.png" alt="" />
-                </div>
-              </div>
-            </div>
+            <template v-if="!showLrc">
+              <keep-alive>
+                <PlayerDisc
+                  :current-song-detail="currentSongDetail"
+                  @change="changeComponent"
+                ></PlayerDisc>
+              </keep-alive>
+            </template>
+            <template v-else>
+              <keep-alive>
+                <LyricPage :resolveLyric="resolveLyric" @change="changeComponent"></LyricPage>
+              </keep-alive>
+            </template>
           </div>
 
           <!-- 底部 -->
@@ -132,9 +115,14 @@
 
 <script>
 import SongListPage from "@/views/SongListPage.vue";
+import LyricPage from "@/views/LyricPage.vue";
+import PlayerDisc from "@/views/PlayerDisc.vue";
+
 export default {
   components: {
-    SongListPage
+    SongListPage,
+    LyricPage,
+    PlayerDisc
   },
   props: ["currentSongId", "currentSongIndex"],
   data() {
@@ -167,7 +155,10 @@ export default {
           imgUrl: require("@/assets/randomPlay.png")
         }
       ],
-      value: 0
+      value: 0,
+      lyric: null,
+      showLrc: false,
+      audio: null
     };
   },
   computed: {
@@ -176,12 +167,33 @@ export default {
     },
     cu() {
       return (this.currentTime / this.durationTime) * 100;
+    },
+    resolveLyric() {
+      let geciArr = this.lyric.split("\n");
+      window.console.log(geciArr);
+      let arr = [];
+      geciArr.forEach((element, index) => {
+        let t = element.slice(1, element.indexOf("]"));
+
+        window.console.log(t);
+        arr[index] = {
+          //时间处理为秒单位
+          time: Number(t.slice(0, 2)) * 60 + Number(t.slice(3)),
+          text: element.slice(element.indexOf("]") + 1).trim()
+        };
+      });
+      window.console.log(arr);
+      arr.pop();
+      return arr;
     }
   },
   methods: {
+    changeComponent() {
+      this.showLrc = !this.showLrc;
+    },
     setCurrent() {
-      let audio = this.$el.querySelector("audio");
-      audio.currentTime = this.currentTime;
+      // let audio = this.$el.querySelector("audio");
+      this.audio.currentTime = this.currentTime;
     },
     randomNum(min, max) {
       return Math.round(Math.random() * (max - min) + min);
@@ -191,16 +203,16 @@ export default {
       this.playMode(this.currentModeIndex);
     },
     playMode(i) {
-      let audio = this.$el.querySelector("audio");
+      // let audio = this.$el.querySelector("audio");
       if (i == 1) {
-        audio.loop = true;
+        this.audio.loop = true;
       }
       if (i == 2) {
         //随机播放
-        audio.loop = false;
+        this.audio.loop = false;
       }
       if (i == 3) {
-        audio.loop = false;
+        this.audio.loop = false;
       }
     },
     prevSong() {
@@ -225,7 +237,7 @@ export default {
     },
     showFullScreen() {
       this.isShowFullScreenPlayer = !this.isShowFullScreenPlayer;
-      this.$emit("show", this.isShowFullScreenPlayer);
+        this.$emit("show", this.isShowFullScreenPlayer);
     },
     getSongDetail() {
       this.axios
@@ -246,27 +258,27 @@ export default {
       this.songListLength = this.songList.length;
     },
     pausedAudio() {
-      let audio = this.$el.querySelector("audio");
+      // let audio = this.$el.querySelector("audio");
 
       if (this.isPaused) {
-        audio.play();
+        this.audio.play();
       } else {
-        audio.pause();
+        this.audio.pause();
       }
-      this.isPaused = audio.paused;
+      this.isPaused = this.audio.paused;
     },
     drawCircleProgress() {
-      let audio = this.$el.querySelector("audio");
+      // let audio = this.$el.querySelector("audio");
 
       let canvas = this.$el.querySelector("canvas");
       let ctx = canvas.getContext("2d");
 
       let id = window.setInterval(() => {
-        if (audio.ended && this.currentModeIndex !== 1) {
+        if (this.audio.ended && this.currentModeIndex !== 1) {
           this.nextSong();
         }
         window.console.log("dd");
-        this.currentTime = audio.currentTime;
+        // this.currentTime = this.audio.currentTime;
 
         ctx.clearRect(0, 0, 36, 36);
 
@@ -284,13 +296,55 @@ export default {
           -0.5 * Math.PI,
           2 * Math.PI * (this.currentTime / this.durationTime) - 0.5 * Math.PI
         );
-        ctx.strokeStyle = "#42b983";
+        ctx.strokeStyle = "#151414";
         ctx.stroke();
       }, 1000);
       return id;
+    },
+    getCurrentIndex() {
+      for (let i = this.resolveLyric.length - 1; i >= 0; i--) {
+        let lrcObj = this.resolveLyric[i];
+        if (lrcObj.time < this.currentTime) {
+          return i;
+        }
+      }
+      return -1;
     }
   },
   watch: {
+    audio() {
+      window.console.log("歌词触发");
+      this.audio.ontimeupdate = () => {
+        window.console.log("xxx");
+        this.currentTime = this.audio.currentTime;
+        // 根据当前播放的时间得到歌词数组的下标
+        let index = this.getCurrentIndex();
+        window.console.log(index);
+
+        if (this.showLrc) {
+          let ul = document.querySelector(".ullrc");
+          let li = ul.querySelector(".active");
+          let divHeight = document.querySelector(".lrc").offsetHeight //歌词容器的高度
+          window.console.log(divHeight)
+          // let divHeight = 450; //歌词容器的高度
+          let liHeight = 30; //每个li的高度
+          let top = index * liHeight + liHeight / 2 - divHeight / 2;
+          // if (top < 0) {
+          //   top = 0;
+          // }
+          ul.style.marginTop = -top + "px";
+
+          if (li) {
+            li.className = "";
+          }
+          //设置某个li的类名为active
+          if (index >= 0) {
+            ul.children[index].className = "active";
+          }
+        }
+      };
+    },
+    //处理当前时间
     currentTime() {
       this.value = (this.currentTime / this.durationTime) * 100;
       var nm =
@@ -304,6 +358,7 @@ export default {
       let nowTime = nm + ":" + ns;
       this.nowTime = nowTime;
     },
+    //处理总的时间
     durationTime() {
       var tm =
         parseInt(this.durationTime / 60) < 10
@@ -339,10 +394,22 @@ export default {
     currentSongDetail() {
       // 第一次进入 后面每次更新
       this.$nextTick(() => {
+        this.audio = document.querySelector("audio");
+
         window.console.log("xxxxxxxxxxx", this);
         window.clearInterval(this.animateId);
         this.animateId = this.drawCircleProgress();
       });
+      //当前歌曲改变 拿歌词
+      this.axios
+        .get("http://music.kele8.cn/lyric", {
+          params: {
+            id: this.currentSongDetail.id
+          }
+        })
+        .then(res => {
+          this.lyric = res.data.lrc.lyric;
+        });
     }
   },
   created() {
@@ -350,7 +417,8 @@ export default {
   },
   updated() {
     // this.setCurrent();
-  }
+  },
+  mounted() {}
 };
 </script>
 
@@ -367,7 +435,7 @@ export default {
   left: 0;
   width: 100%;
   //   height: 60px;
-  transition: all 0.6s;
+  transition: all 0.3s;
   &.active {
     bottom: 0;
   }
@@ -602,6 +670,7 @@ export default {
             }
           }
         }
+        
       }
 
       //------------------------------------底部
@@ -634,11 +703,13 @@ export default {
                 position: absolute;
                 top: 12px;
                 left: 0;
+                pointer-events: none;
                 .back {
                   width: 10%;
                   height: 100%;
                   background: rgb(219, 219, 219);
                   transition: all 0.3s;
+                  pointer-events: none;
                 }
                 .pointer {
                   width: 10px;
